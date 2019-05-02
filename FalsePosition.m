@@ -1,12 +1,14 @@
-function [ table ] = FalsePosition( fun,xl,xu,numOfIterations,eps,epsType )
+function [ table, root, time, errorMsg] = FalsePosition( fun,xl,xu,numOfIterations,eps,epsType )
 %UNTITLED2 Summary of this function goes here
 e = exp(1);
 syms x;
 f(x)=sym(fun);
 table=[];
 xOld=0;
+tic;
 if xl==xu
-    fprintf('Can not divide by zero')
+    errorMsg = 'Can not divide by zero';
+    time = toc;
     return
 end
 for i=1:numOfIterations
@@ -24,13 +26,16 @@ for i=1:numOfIterations
     end
     if error<= eps
         root=xr;
+        time = toc;
         return
     end
     xOld=xr;
 end
 if i>=numOfIterations
-    fprintf('root not found to desired tolerance');
+    errorMsg='root not found to desired tolerance';
 end
 root=xr;
+time = toc;
+return;
 end
 

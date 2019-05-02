@@ -1,11 +1,13 @@
-function [ table,root ] = Secant(fun,xPrev,xPrev1,numOfIterations,eps,epsType )
+function [ table,root, time, errorMsg ] = Secant(fun,xPrev,xPrev1,numOfIterations,eps,epsType )
 %UNTITLED3 Summary of this function goes here
 e = exp(1);
 syms x;
 f(x)=sym(fun);
 table=[];
+tic;
 if xPrev==xPrev1
-    fprintf('Can not divide by zero')
+    errorMsg = 'Can not divide by zero';
+    time = toc;
     return
 end
 for i=1:numOfIterations
@@ -18,14 +20,17 @@ for i=1:numOfIterations
     table=[table;i xPrev1 xPrev eval(f(xPrev1)) eval(f(xPrev)) xNew error];
     if error< eps
         root=xNew;
+        time = toc;
         return
     end
     xPrev1=xPrev;
     xPrev=xNew;
 end
 if i>=numOfIterations
-    fprintf('root not found to desired tolerance');
+    errorMsg = 'root not found to desired tolerance';
 end
 root=xNew;
+time = toc;
+return;
 end
 

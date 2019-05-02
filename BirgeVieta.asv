@@ -10,8 +10,6 @@ try
     a = sym2poly(f);
 catch
    errorMsg = 'not a polynomial function';
-   time = toc;
-   return;
 end
 b=[];
 c=[];

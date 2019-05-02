@@ -61,14 +61,13 @@ for i=1:numOfIterations
     table=[table; i xPrev xNew error];
     if xNew==xPrev || error<= eps
         root=xNew;
-        time = toc;
+        time = toc
         return
     end
 end
 if i>=numOfIterations
-    error = 'root not found to desired tolerance';
+    fprintf('root not found to desired tolerance');
 end
 root=xNew;
-time = toc;
 return
 end

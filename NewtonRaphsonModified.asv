@@ -13,8 +13,7 @@ for i=1:numOfIterations
     num=(eval(f(xPrev))*eval(fDash(xPrev)));
     denom=(eval(fDash(xPrev)))^2-(eval(f(xPrev))*eval(fDoubleDash(xPrev)));
     if(denom==0)
-        errorMsg = 'Can not divide by zero';
-        time = toc;
+        fprintf('Can not divide by zero';
         return;
     end
     xNew=xPrev-(num/denom);
@@ -26,15 +25,13 @@ for i=1:numOfIterations
     table=[table; i xPrev xNew eval(f(xPrev)) eval(fDash(xPrev)) eval(fDoubleDash(xPrev)) error];
     if xNew==xPrev || error< eps
         root=xNew;
-        time = toc;
         return
     end
 end
 if i>=numOfIterations
-    errorMsg = 'root not found to desired tolerance';
+    fprintf('root not found to desired tolerance');
 end
 root=xNew;
-time = toc;
 return
 end
 

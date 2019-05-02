@@ -1,4 +1,4 @@
-function [ table ] = Bisection( fun,xl,xu,numOfIterations,eps, epsType )
+function [ table, root, time, errorMsg] = Bisection( fun,xl,xu,numOfIterations,eps, epsType )
 %UNTITLED Summary of this function goes here
 %   Detailed explanation goes here
 e = exp(1);
@@ -6,8 +6,10 @@ syms x;
 f(x)=sym(fun);
 table=[];
 xOld=0;
+tic;
 if eval(f(xl))*eval(f(xu))>0
-    fprintf('root does not exist in this interval')
+    errorMsg = 'root does not exist in this interval';
+    time = toc;
     return
 end
 if eval(f(xl))*eval(f(xu))==0
@@ -15,11 +17,13 @@ if eval(f(xl))*eval(f(xu))==0
         xr=xl;
         root=xr;
         table=[table;1 xl xu xr eval(f(xr)) 0];
+        time = toc;
         return
     else
         xr=xu;
         root=xr;
         table=[table;1 xl xu xr eval(f(xr)) 0];
+        time = toc;
         return
     end
 end
@@ -38,13 +42,16 @@ for i=1:numOfIterations
     end
     if error<= eps
         root=xr;
+        time = toc;
         return
     end
     xOld=xr;
 end
 if i>=numOfIterations
-    fprintf('root not found to desired tolerance');
+    errorMsg = 'root not found to desired tolerance';
 end
 root=xr;
+time = toc;
+return;
 end
 

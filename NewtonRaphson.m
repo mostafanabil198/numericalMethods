@@ -1,4 +1,4 @@
-function [table] = NewtonRaphson( fun,x0,numOfIterations,eps,epsType )
+function [table, root, time, errorMsg] = NewtonRaphson( fun,x0,numOfIterations,eps,epsType )
 %Newton Raphson method for calculating roots of equation
 e=exp(1);
 syms x;
@@ -6,10 +6,12 @@ f(x)=sym(fun);
 fDash(x)=diff(f,x);
 xNew=x0;
 table=[];
+tic;
 for i=1:numOfIterations
     xPrev=xNew;
     if(eval(fDash(xPrev))==0)
-        fprintf('Can not divide by zero')
+        errorMsg = 'Can not divide by zero';
+        time = toc;
         return;
     end
     xNew=xPrev-(eval(f(xPrev))/eval(fDash(xPrev)));
@@ -21,13 +23,15 @@ for i=1:numOfIterations
     table=[table; i xPrev xNew eval(f(xPrev)) eval(fDash(xPrev)) error];
     if xNew==xPrev || error< eps
         root=xNew;
+        time = toc;
         return
     end
 end
 if i>=numOfIterations
-    fprintf('root not found to desired tolerance');
+    errorMsg = 'root not found to desired tolerance';
 end
 root=xNew;
+time = toc;
 return
 end
 
