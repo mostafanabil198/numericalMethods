@@ -2,6 +2,9 @@ function [table, root, time, errorMsg] = NewtonRaphson( fun,x0,numOfIterations,e
 %Newton Raphson method for calculating roots of equation
 e=exp(1);
 syms x;
+root = 0;
+time = 0;
+errorMsg = ' ';
 f(x)=sym(fun);
 fDash(x)=diff(f,x);
 xNew=x0;

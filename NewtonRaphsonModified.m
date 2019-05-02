@@ -1,6 +1,9 @@
 function [ table, root, time, errorMsg ] = NewtonRaphsonModified( fun,x0,numOfIterations,eps,epsType )
 %Newton Raphson modified method for multiple roots
 e=exp(1);
+root = 0;
+time = 0;
+errorMsg = ' ';
 syms x;
 tic;
 f(x)=sym(fun);

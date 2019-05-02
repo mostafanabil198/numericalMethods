@@ -2,6 +2,9 @@ function [ table, root, time, errorMsg ] = BirgeVieta( fun,x0,numOfIterations,ep
 %UNTITLED8 Summary of this function goes here
 %   Detailed explanation goes here
 syms x;
+root = 0;
+time = 0;
+errorMsg = ' ';
 f(x)=sym(fun);
 xNew=x0;
 table=[];

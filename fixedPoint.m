@@ -2,6 +2,10 @@ function [ table, root, time, note, errorMsg ] = FixedPoint( fun, x0,numOfIterat
 %UNTITLED Summary of this function goes here
 %   Detailed explanation goes here
 e = exp(1);
+root = 0;
+time = 0;
+note = ' ';
+errorMsg = ' ';
 syms x;
 f(x)=sym(fun);
 min = Inf;

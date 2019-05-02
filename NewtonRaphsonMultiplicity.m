@@ -1,6 +1,9 @@
 function [ table, root, time, errorMsg ] = NewtonRaphsonMultiplicity( fun,x0,numOfIterations,eps,epsType,m )
 %Newton Raphson method with multiplicity for calculating roots of equation
 e=exp(1);
+root = 0;
+time = 0;
+errorMsg = ' ';
 syms x;
 f(x)=sym(fun);
 fDash(x)=diff(f,x);

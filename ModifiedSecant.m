@@ -1,6 +1,9 @@
 function [table, root, time, errorMsg ] = ModifiedSecant( fun,xPrev,delta,numOfIterations,eps,epsType )
 %UNTITLED3 Summary of this function goes here
 e = exp(1);
+root = 0;
+time = 0;
+errorMsg = ' ';
 syms x;
 f(x)=sym(fun);
 table=[];

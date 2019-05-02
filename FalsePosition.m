@@ -2,6 +2,9 @@ function [ table, root, time, errorMsg] = FalsePosition( fun,xl,xu,numOfIteratio
 %UNTITLED2 Summary of this function goes here
 e = exp(1);
 syms x;
+root = 0;
+time = 0;
+errorMsg = ' ';
 f(x)=sym(fun);
 table=[];
 xOld=0;

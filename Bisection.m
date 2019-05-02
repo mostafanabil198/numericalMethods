@@ -2,6 +2,9 @@ function [ table, root, time, errorMsg] = Bisection( fun,xl,xu,numOfIterations,e
 %UNTITLED Summary of this function goes here
 %   Detailed explanation goes here
 e = exp(1);
+root = 0;
+time = 0;
+errorMsg = ' ';
 syms x;
 f(x)=sym(fun);
 table=[];
