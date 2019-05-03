@@ -1,9 +1,10 @@
-function [ table, root, time, errorMsg] = Bisection( fun,xl,xu,numOfIterations,eps, epsType )
+function [ table, root, time, errorMsg, theoretical] = Bisection( fun,xl,xu,numOfIterations,eps, epsType )
 %UNTITLED Summary of this function goes here
 %   Detailed explanation goes here
 e = exp(1);
 root = 0;
 time = 0;
+theoretical=0;
 errorMsg = ' ';
 syms x;
 f(x)=sym(fun);
@@ -30,6 +31,7 @@ if eval(f(xl))*eval(f(xu))==0
         return
     end
 end
+theoretical= ceil(abs(log2(abs(xl-xu))-log2(eps)))
 for i=1:numOfIterations
     xr = (xl + xu)/2;
     if strcmp(epsType,'true')

@@ -1,4 +1,4 @@
-function [ table, root, time, note, errorMsg, g, gDash] = FixedPoint( fun, x0,numOfIterations,eps,epsType )
+function [ table, root, time, note, errorMsg, g, gDash] = fixedPoint( fun, x0,numOfIterations,eps,epsType )
 %UNTITLED Summary of this function goes here
 %   Detailed explanation goes here
 e = exp(1);
