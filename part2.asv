@@ -283,10 +283,7 @@ function solve_Callback(hObject, eventdata, handles)
             num = str2double(get(handles.numitr , 'string'));
             [ xs,times,errorMsgs,tables ] = GaussSeidel( fun,initial ,num,error,type );
         end
-        setappdata(0,'xs',xs);
-        setappdata(0,'times',times);
-        setappdata(0,'errorMsgs',errorMsgs);
-        setappdata(0,'tables',tables);
+        setappdata(0,'')
 
     else
         set(handles.wrong , 'string','input guess');
