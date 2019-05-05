@@ -23,10 +23,12 @@ elseif strcmp(method,'GaussSeidel')
     numX = (size(table(:),1)-1)/2;
     for i=2:(size(table(:),1)-1)
         if i == numX
-            header{1,i} = strcat('E',(i/2)-1);
+        
         else
             header{1,i} = strcat('X',i-1);
         end
+        
+        
     end
 end
 
