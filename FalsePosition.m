@@ -21,7 +21,7 @@ for i=1:numOfIterations
     else
         error=(abs(xr-xOld)/xr)*100;
     end
-    table=[table; i xr xl xu eval(f(xr)) error];
+    table=[table; i xl xu xr eval(f(xr)) error];
     if eval(f(xr))*eval(f(xl))>0
         xl=xr;
     else
