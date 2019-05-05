@@ -7,6 +7,7 @@ grid on;
 xlabel('Iterations')
 ylabel('Roots')
 ylim([0 50])
+legend({'Bisection','False Position',''},'Location','southwest')
 plot(bisection(:,1), bisection(:,4));
 hold on;
 plot(falsePosition(:,1), falsePosition(:,4));
@@ -20,6 +21,5 @@ hold on;
 plot(secant(:,1), secant(:,6));
 hold on;
 plot(secantModified(:,1), secantModified(:,6));
-legend({'Bisection','False Position','Fixed Point','Newton Raphson','Modified Newton Raphson','Secant','Modified Secant'},'Location','southwest')
 end
 
