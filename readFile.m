@@ -6,7 +6,7 @@ function [ fun, method, interval, numOfIterations, eps, epsType  ] = readFile( f
     epsType = 'false';
     numOfIterations = 50;
     
-    fid=fopen(fileName);
+    fid=fopen(fileName, 'r');
     tline = fgetl(fid);
     tlines = cell(0,1);
     while ischar(tline)

@@ -20,7 +20,7 @@ for i=1:numOfIterations
     else
         error=(abs(xNew-xPrev)/xNew)*100;
     end
-    table=[table;i xPrev1 xPrev eval(f(xPrev1)) eval(f(xPrev)) xNew error];
+    table=[table;i xPrev xPrev1 eval(f(xPrev)) eval(f(xPrev1)) xNew error];
     if error< eps
         root=xNew;
         time = toc;
