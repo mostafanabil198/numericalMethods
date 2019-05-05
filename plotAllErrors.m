@@ -2,8 +2,11 @@ function [] = plotAllErrors(  bisection,falsePosition,fixedPoint,newtonRaphson,n
 %UNTITLED8 Summary of this function goes here
 %   Detailed explanation goes here
 figure;
+clf;
 grid on;
-ylim([-10 10])
+xlabel('Iterations')
+ylabel('Errors')
+ylim([0 50])
 plot(bisection(:,1), bisection(:,6));
 hold on;
 plot(falsePosition(:,1), falsePosition(:,6));
@@ -17,5 +20,6 @@ hold on;
 plot(secant(:,1), secant(:,7));
 hold on;
 plot(secantModified(:,1), secantModified(:,7));
+legend({'Bisection','False Position','Fixed Point','Newton Raphson','Modified Newton Raphson','Secant','Modified Secant'},'Location','southwest')
 end
 

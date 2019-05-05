@@ -3,7 +3,9 @@ function [ x,time,errorMsg,table ] = GaussSeidel( eqns,initials,numOfIterations,
 %   Detailed explanation goes here
 [a,b]=equationsToMatrix(eqns);
 n=length(eqns);
-x=initials;
+for z=1:length(initials)
+    x(z,1)=initials(1,z);
+end
 table=[];
 if a(1,1)>=a(1,2)+a(1,3)
     if a(2,2)>= a(2,1)+a(2,3)
@@ -26,12 +28,12 @@ for k=1:numOfIterations
     for i=1:n
         sum=0;
         for j=1:i-1
-            sum=sum+a(i,j)*x(1,j);
+            sum=sum+a(i,j)*x(j,1);
         end
         for j=i+1:n
-            sum=sum+a(i,j)*xOld(1,j);
+            sum=sum+a(i,j)*xOld(j,1);
         end
-        x(1,i)=(b(i)-sum)/a(i,i);
+        x(i,1)=(b(i)-sum)/a(i,i);
     end
     if strcmp(epsType,'true')
         table=[table;k x abs(x-xOld)];
