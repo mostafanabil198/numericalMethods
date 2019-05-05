@@ -79,7 +79,7 @@ function choosemethod_Callback(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
-contents = cellstr(get(hObject,'String'))
+contents = cellstr(get(hObject,'String'));
 switch contents{get(hObject,'Value')} 
     
     case 'Bisection'
@@ -366,14 +366,14 @@ function resultbisection_Callback(hObject, eventdata, handles)
 % hObject    handle to resultbisection (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA
-    if(~strcmp(get(handles.xl , 'string'),'') && ~strcmp(get(handles.xu , 'string'),'') &&~strcmp(get(handles.fun , 'string'),'') )
+    if(~isempty(get(handles.xl , 'string')) && ~isempty(get(handles.xu , 'string')) && ~isempty(get(handles.fun , 'string')) )
         try
             xl = str2double(get(handles.xl , 'string'));
             xu = str2double(get(handles.xu , 'string'));
             fun = get(handles.fun,'string');
-            if(strcmp(get(handles.numitrbisection , 'string'),'') && strcmp(get(handles.errorbisection , 'string'),''))
-                [ table, root, time, errorMsg] = Bisection(fun,xl,xu,50,0.00001,'false');
-            elseif(strcmp(get(handles.numitrbisection , 'string'),''))
+            if(isempty(get(handles.numitrbisection , 'string')) && isempty(get(handles.errorbisection , 'string')))
+                [ table, root, time, errorMsg , theoretical] = Bisection(fun,xl,xu,50,0.00001,'false');
+            elseif(isempty(get(handles.numitrbisection , 'string')))
                     switch get(handles.typebisection,'Value')   
                         case 1
                             type = 'false';
@@ -381,10 +381,10 @@ function resultbisection_Callback(hObject, eventdata, handles)
                             type = 'true';
                         otherwise
                     end 
-                [ table, root, time, errorMsg] = Bisection(fun,xl,xu,50,str2double(get(handles.errorbisection , 'string')),type);
+                [ table, root, time, errorMsg , theoretical] = Bisection(fun,xl,xu,50,str2double(get(handles.errorbisection , 'string')),type);
                 
-                elseif(strcmp(get(handles.errorbisection , 'string'),''))
-                [ table, root, time, errorMsg] = Bisection(fun,xl,xu,str2double(get(handles.numitrbisection , 'string')),0.00001,'false');
+                elseif(isempty(get(handles.errorbisection , 'string')))
+                [ table, root, time, errorMsg , theoretical] = Bisection(fun,xl,xu,str2double(get(handles.numitrbisection , 'string')),0.00001,'false');
                 
              else
                      switch get(handles.typebisection,'Value')   
@@ -394,7 +394,7 @@ function resultbisection_Callback(hObject, eventdata, handles)
                                 type = 'true';
                             otherwise
                         end 
-                    [ table, root, time, errorMsg] = Bisection(fun,xl,xu,str2double(get(handles.numitrbisection , 'string')),str2double(get(handles.errorbisection , 'string')),type);
+                    [ table, root, time, errorMsg , theoretical] = Bisection(fun,xl,xu,str2double(get(handles.numitrbisection , 'string')),str2double(get(handles.errorbisection , 'string')),type);
              end
         catch
             set(handles.errorlabel , 'string' , 'invalid input');
@@ -525,14 +525,14 @@ function resultsecant1_Callback(hObject, eventdata, handles)
 % hObject    handle to resultsecant1 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-    if(~strcmp(get(handles.xisecant1 , 'string'),'')&& ~strcmp(get(handles.ximinussecant1 , 'string'),'')  &&~strcmp(get(handles.fun , 'string'),'') )
+    if(~isempty(get(handles.xisecant1 , 'string'))&& ~isempty(get(handles.ximinussecant1 , 'string'))  &&~isempty(get(handles.fun , 'string')) )
             try
                 xi = str2double(get(handles.xisecant1 , 'string'));
                 xminus = str2double(get(handles.ximinussecant1 , 'string'));
                 fun = get(handles.fun,'string');
-                if(strcmp(get(handles.numitrsecant1 , 'string'),'') && strcmp(get(handles.errorsecant1 , 'string'),''))
+                if(isempty(get(handles.numitrsecant1 , 'string')) && isempty(get(handles.errorsecant1 , 'string')))
                     [ table, root, time, errorMsg] = Secant(fun,xi,xminus,50,0.00001,'false');
-                elseif(strcmp(get(handles.numitrsecant1 , 'string'),''))
+                elseif(isempty(get(handles.numitrsecant1 , 'string')))
                         switch get(handles.typesecant1,'Value')   
                             case 1
                                 type = 'false';
@@ -542,7 +542,7 @@ function resultsecant1_Callback(hObject, eventdata, handles)
                         end 
                     [ table, root, time, errorMsg] = Secant(fun,xi,xminus,50,str2double(get(handles.errorsecant1 , 'string')),type);
 
-                    elseif(strcmp(get(handles.errorsecant1 , 'string'),''))
+                    elseif(isempty(get(handles.errorsecant1 , 'string')))
                     [ table, root, time, errorMsg] = Secant(fun,xi,xminus,str2double(get(handles.numitrsecant1 , 'string')),0.00001,'false');
 
                  else
@@ -706,14 +706,14 @@ function resultsecant2_Callback(hObject, eventdata, handles)
 % hObject    handle to resultsecant2 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-    if(~strcmp(get(handles.xisecant2 , 'string'),'')&& ~strcmp(get(handles.deltasecant2 , 'string'),'')  &&~strcmp(get(handles.fun , 'string'),'') )
+    if(~isempty(get(handles.xisecant2 , 'string'))&& ~isempty(get(handles.deltasecant2 , 'string'))  &&~isempty(get(handles.fun , 'string')) )
             try
                 xi = str2double(get(handles.xisecant1 , 'string'));
                 delta = str2double(get(handles.deltasecant2 , 'string'));
                 fun = get(handles.fun,'string');
-                if(strcmp(get(handles.numitrsecant2 , 'string'),'') && strcmp(get(handles.errorsecant2 , 'string'),''))
+                if(isempty(get(handles.numitrsecant2 , 'string')) && isempty(get(handles.errorsecant2 , 'string')))
                     [ table, root, time, errorMsg] = ModifiedSecant(fun,xi,delta,50,0.00001,'false');
-                elseif(strcmp(get(handles.numitrsecant2 , 'string'),''))
+                elseif(isempty(get(handles.numitrsecant2 , 'string')))
                         switch get(handles.typesecant2,'Value')   
                             case 1
                                 type = 'false';
@@ -723,7 +723,7 @@ function resultsecant2_Callback(hObject, eventdata, handles)
                         end 
                     [ table, root, time, errorMsg] = ModifiedSecant(fun,xi,delta,50,str2double(get(handles.errorsecant2 , 'string')),type);
 
-                    elseif(strcmp(get(handles.errorsecant2 , 'string'),''))
+                    elseif(isempty(get(handles.errorsecant2 , 'string')))
                     [ table, root, time, errorMsg] = ModifiedSecant(fun,xi,delta,str2double(get(handles.numitrsecant2 , 'string')),0.00001,'false');
 
                  else
@@ -841,13 +841,13 @@ function resultnewton_Callback(hObject, eventdata, handles)
 % hObject    handle to resultnewton (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-    if(~strcmp(get(handles.xinewton , 'string'),'')  &&~strcmp(get(handles.fun , 'string'),'') )
+    if(~isempty(get(handles.xinewton , 'string'))  &&~isempty(get(handles.fun , 'string')) )
             try
                 xi = str2double(get(handles.xinewton , 'string'));
                 fun = get(handles.fun,'string');
-                if(strcmp(get(handles.numitrnewton , 'string'),'') && strcmp(get(handles.errornewton , 'string'),''))
+                if(isempty(get(handles.numitrnewton , 'string')) && isempty(get(handles.errornewton , 'string')))
                     [ table, root, time, errorMsg] = NewtonRaphson(fun,xi,50,0.00001,'false');
-                elseif(strcmp(get(handles.numitrnewton , 'string'),''))
+                elseif(isempty(get(handles.numitrnewton , 'string')))
                         switch get(handles.typenewton,'Value')   
                             case 1
                                 type = 'false';
@@ -857,7 +857,7 @@ function resultnewton_Callback(hObject, eventdata, handles)
                         end 
                     [ table, root, time, errorMsg] = NewtonRaphson(fun,xi,50,str2double(get(handles.errornewton , 'string')),type);
 
-                    elseif(strcmp(get(handles.errornewton , 'string'),''))
+                    elseif(isempty(get(handles.errornewton , 'string')))
                     [ table, root, time, errorMsg] = NewtonRaphson(fun,xi,str2double(get(handles.numitrnewton , 'string')),0.00001,'false');
 
                  else
@@ -975,14 +975,14 @@ function resultnewton1_Callback(hObject, eventdata, handles)
 % hObject    handle to resultnewton1 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-    if(~strcmp(get(handles.xinewton1 , 'string'),'')  &&~strcmp(get(handles.fun , 'string'),'') && ~strcmp(get(handles.mnewton1 , 'string'),'')  )
+    if(~isempty(get(handles.xinewton1 , 'string'))  &&~isempty(get(handles.fun , 'string')) && ~isempty(get(handles.mnewton1 , 'string'))  )
             try
                 xi = str2double(get(handles.xinewton1 , 'string'));
                 m = str2double(get(handles.mnewton1 , 'string'));
                 fun = get(handles.fun,'string');
-                if(strcmp(get(handles.numitrnewton1 , 'string'),'') && strcmp(get(handles.errornewton1 , 'string'),''))
+                if(isempty(get(handles.numitrnewton1 , 'string')) && isempty(get(handles.errornewton1 , 'string')))
                     [ table, root, time, errorMsg] = NewtonRaphsonMultiplicity(fun,xi,50,0.00001,'false',m);
-                elseif(strcmp(get(handles.numitrnewton1 , 'string'),''))
+                elseif(isempty(get(handles.numitrnewton1 , 'string')))
                         switch get(handles.typenewton1,'Value')   
                             case 1
                                 type = 'false';
@@ -992,7 +992,7 @@ function resultnewton1_Callback(hObject, eventdata, handles)
                         end 
                     [ table, root, time, errorMsg] = NewtonRaphsonMultiplicity(fun,xi,50,str2double(get(handles.errornewton1 , 'string')),type,m);
 
-                    elseif(strcmp(get(handles.errornewton1 , 'string'),''))
+                    elseif(isempty(get(handles.errornewton1 , 'string')))
                     [ table, root, time, errorMsg] = NewtonRaphsonMultiplicity(fun,xi,str2double(get(handles.numitrnewton1 , 'string')),0.00001,'false',m);
 
                  else
@@ -1133,13 +1133,13 @@ function resultnewton2_Callback(hObject, eventdata, handles)
 % hObject    handle to resultnewton2 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-    if(~strcmp(get(handles.xinewton2 , 'string'),'')  &&~strcmp(get(handles.fun , 'string'),'') )
+    if(~isempty(get(handles.xinewton2 , 'string'))  &&~isempty(get(handles.fun , 'string')) )
             try
                 xi = str2double(get(handles.xinewton2 , 'string'));
                 fun = get(handles.fun,'string');
-                if(strcmp(get(handles.numitrnewton2 , 'string'),'') && strcmp(get(handles.errornewton2 , 'string'),''))
+                if(isempty(get(handles.numitrnewton2 , 'string')) && isempty(get(handles.errornewton2 , 'string')))
                     [ table, root, time, errorMsg] = NewtonRaphsonModified(fun,xi,50,0.00001,'false');
-                elseif(strcmp(get(handles.numitrnewton2 , 'string'),''))
+                elseif(isempty(get(handles.numitrnewton2 , 'string')))
                         switch get(handles.typenewton2,'Value')   
                             case 1
                                 type = 'false';
@@ -1149,7 +1149,7 @@ function resultnewton2_Callback(hObject, eventdata, handles)
                         end 
                     [ table, root, time, errorMsg] = NewtonRaphsonModified(fun,xi,50,str2double(get(handles.errornewton2 , 'string')),type);
 
-                    elseif(strcmp(get(handles.errornewton2 , 'string'),''))
+                    elseif(isempty(get(handles.errornewton2 , 'string')))
                     [ table, root, time, errorMsg] = NewtonRaphsonModified(fun,xi,str2double(get(handles.numitrnewton2 , 'string')),0.00001,'false');
 
                  else
@@ -1269,13 +1269,13 @@ function resultfixed_Callback(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
-    if(~strcmp(get(handles.xifixed , 'string'),'')  &&~strcmp(get(handles.fun , 'string'),'') )
+    if(~isempty(get(handles.xifixed , 'string'))  &&~isempty(get(handles.fun , 'string')) )
             try
                 xi = str2double(get(handles.xifixed , 'string'));
                 fun = get(handles.fun,'string');
-                if(strcmp(get(handles.numitrfixed , 'string'),'') && strcmp(get(handles.errorfixed , 'string'),''))
-                    [ table, root, time, errorMsg] = FixedPoint(fun,xi,50,0.00001,'false');
-                elseif(strcmp(get(handles.numitrfixed , 'string'),''))
+                if(isempty(get(handles.numitrfixed , 'string')) && isempty(get(handles.errorfixed , 'string')))
+                    [ table, root, time, errorMsg , g , gDash] = FixedPoint(fun,xi,50,0.00001,'false');
+                elseif(isempty(get(handles.numitrfixed , 'string')))
                         switch get(handles.typefixed,'Value')   
                             case 1
                                 type = 'false';
@@ -1283,10 +1283,10 @@ function resultfixed_Callback(hObject, eventdata, handles)
                                 type = 'true';
                             otherwise
                         end 
-                    [ table, root, time, errorMsg] = FixedPoint(fun,xi,50,str2double(get(handles.errorfixed , 'string')),type);
+                    [ table, root, time, errorMsg , g , gDash] = FixedPoint(fun,xi,50,str2double(get(handles.errorfixed , 'string')),type);
 
-                    elseif(strcmp(get(handles.errorfixed , 'string'),''))
-                    [ table, root, time, errorMsg] = FixedPoint(fun,xi,str2double(get(handles.numitrfixed , 'string')),0.00001,'false');
+                    elseif(isempty(get(handles.errorfixed , 'string')))
+                    [ table, root, time, errorMsg , g , gDash] = FixedPoint(fun,xi,str2double(get(handles.numitrfixed , 'string')),0.00001,'false');
 
                  else
                          switch get(handles.typefixed,'Value')   
@@ -1296,7 +1296,7 @@ function resultfixed_Callback(hObject, eventdata, handles)
                                     type = 'true';
                                 otherwise
                             end 
-                        [ table, root, time, errorMsg] = FixedPoint(fun,xi,str2double(get(handles.numitrfixed , 'string')),str2double(get(handles.errorfixed , 'string')),type);
+                        [ table, root, time, errorMsg , g , gDash] = FixedPoint(fun,xi,str2double(get(handles.numitrfixed , 'string')),str2double(get(handles.errorfixed , 'string')),type);
                  end
             catch
                 set(handles.errorlabel , 'string' , 'invalid input');
@@ -1406,14 +1406,14 @@ function resultfalse_Callback(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
-    if(~strcmp(get(handles.xlfalse , 'string'),'') && ~strcmp(get(handles.xufalse , 'string'),'') &&~strcmp(get(handles.fun , 'string'),'') )
+    if(~isempty(get(handles.xlfalse , 'string')) && ~isempty(get(handles.xufalse , 'string')) &&~isempty(get(handles.fun , 'string')) )
         try
             xl = str2double(get(handles.xlfalse , 'string'));
             xu = str2double(get(handles.xufalse , 'string'));
             fun = get(handles.fun,'string');
-            if(strcmp(get(handles.numitrfalse , 'string'),'') && strcmp(get(handles.errorfalse , 'string'),''))
+            if(isempty(get(handles.numitrfalse , 'string')) && isempty(get(handles.errorfalse , 'string')))
                 [ table, root, time, errorMsg] = FalsePosition(fun,xl,xu,50,0.00001,'false');
-            elseif(strcmp(get(handles.numitrfalse , 'string'),''))
+            elseif(isempty(get(handles.numitrfalse , 'string')))
                     switch get(handles.typefalse,'Value')   
                         case 1
                             type = 'false';
@@ -1423,7 +1423,7 @@ function resultfalse_Callback(hObject, eventdata, handles)
                     end 
                 [ table, root, time, errorMsg] = FalsePosition(fun,xl,xu,50,str2double(get(handles.errorfalse , 'string')),type);
                 
-                elseif(strcmp(get(handles.errorfalse , 'string'),''))
+                elseif(isempty(get(handles.errorfalse , 'string')))
                 [ table, root, time, errorMsg] = FalsePosition(fun,xl,xu,str2double(get(handles.numitrfalse , 'string')),0.00001,'false');
                 
              else
@@ -1686,7 +1686,7 @@ function resultall_Callback(hObject, eventdata, handles)
 % hObject    handle to resultall (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-    if(~strcmp(get(handles.xlall , 'string'),'') && ~strcmp(get(handles.xuall , 'string'),'') && ~strcmp(get(handles.deltaall , 'string'),'') && ~strcmp(get(handles.xiall , 'string'),'') && ~strcmp(get(handles.xminusall , 'string'),'') && ~strcmp(get(handles.mall , 'string'),'') &&~strcmp(get(handles.fun , 'string'),'') )
+    if(~isempty(get(handles.xlall , 'string')) && ~isempty(get(handles.xuall , 'string')) && ~isempty(get(handles.deltaall , 'string')) && ~isempty(get(handles.xiall , 'string')) && ~isempty(get(handles.xminusall , 'string')) && ~isempty(get(handles.mall , 'string')) &&~isempty(get(handles.fun , 'string')) )
         %try
             xl = str2double(get(handles.xlall , 'string'));
             xu = str2double(get(handles.xuall , 'string'));
@@ -1695,17 +1695,17 @@ function resultall_Callback(hObject, eventdata, handles)
             xminus = str2double(get(handles.xminusall , 'string'));
             delta = str2double(get(handles.deltaall , 'string'));
             fun = get(handles.fun,'string');
-            if(strcmp(get(handles.numitrall , 'string'),'') && strcmp(get(handles.errorall , 'string'),''))
-                [ table, root, time, errorMsg] = Bisection(fun,xl,xu,50,0.00001,'false');
+            if(isempty(get(handles.numitrall , 'string')) && isempty(get(handles.errorall , 'string')))
+                [ table, root, time, errorMsg , theoretical] = Bisection(fun,xl,xu,50,0.00001,'false');
                 [ table1, root1, time1, errorMsg1] = FalsePosition(fun,xl,xu,50,0.00001,'false');
-                [ table2, root2, time2, errorMsg2] = FixedPoint(fun,xi,50,0.00001,'false');
+                [ table2, root2, time2, errorMsg2 , g , gDash] = FixedPoint(fun,xi,50,0.00001,'false');
                 [ table3, root3, time3, errorMsg3] = NewtonRaphson(fun,xi,50,0.00001,'false');
                 [ table4, root4, time4, errorMsg4] = NewtonRaphsonMultiplicity(fun,xi,50,0.00001,'false',m);
                 [ table5, root5, time5, errorMsg5] = NewtonRaphsonModified(fun,xi,50,0.00001,'false');
                 [ table6, root6, time6, errorMsg6] = Secant(fun,xi,xminus,50,0.00001,'false');
                 [ table7, root7, time7, errorMsg7] = ModifiedSecant(fun,xi,delta,50,0.00001,'false');
                 [ table8, root8, time8, errorMsg8] = BirgeVieta(fun,xi,50,0.00001,'false');
-            elseif(strcmp(get(handles.numitrall , 'string'),''))
+            elseif(isempty(get(handles.numitrall , 'string')))
                     switch get(handles.typeall,'Value')   
                         case 1
                             type = 'false';
@@ -1715,9 +1715,9 @@ function resultall_Callback(hObject, eventdata, handles)
                     end 
                 %[ table, root, time, errorMsg] = Bisection(fun,xl,xu,50,str2double(get(handles.errorbisection , 'string')),type);
                 
-                [ table, root, time, errorMsg] = Bisection(fun,xl,xu,50,str2double(get(handles.errorall , 'string')),type);
+                [ table, root, time, errorMsg , theoretical] = Bisection(fun,xl,xu,50,str2double(get(handles.errorall , 'string')),type);
                 [ table1, root1, time1, errorMsg1] = FalsePosition(fun,xl,xu,50,str2double(get(handles.errorall , 'string')),type);
-                [ table2, root2, time2, errorMsg2] = FixedPoint(fun,xi,50,str2double(get(handles.errorall , 'string')),type);
+                [ table2, root2, time2, errorMsg2 , g , gDash] = FixedPoint(fun,xi,50,str2double(get(handles.errorall , 'string')),type);
                 [ table3, root3, time3, errorMsg3] = NewtonRaphson(fun,xi,50,str2double(get(handles.errorall , 'string')),type);
                 [ table4, root4, time4, errorMsg4] = NewtonRaphsonMultiplicity(fun,xi,50,str2double(get(handles.errorall , 'string')),type,m);
                 [ table5, root5, time5, errorMsg5] = NewtonRaphsonModified(fun,xi,50,str2double(get(handles.errorall , 'string')),type);
@@ -1725,12 +1725,12 @@ function resultall_Callback(hObject, eventdata, handles)
                 [ table7, root7, time7, errorMsg7] = ModifiedSecant(fun,xi,delta,50,str2double(get(handles.errorall , 'string')),type);
                 [ table8, root8, time8, errorMsg8] = BirgeVieta(fun,xi,50,str2double(get(handles.errorall , 'string')),type);
                 
-                elseif(strcmp(get(handles.errorall , 'string'),''))
+                elseif(isempty(get(handles.errorall , 'string')))
                 %[ table, root, time, errorMsg] = Bisection(fun,xl,xu,str2double(get(handles.numitrbisection , 'string')),0.00001,'false');
                 s = 'not all'
-                [ table, root, time, errorMsg] = Bisection(fun,xl,xu,str2double(get(handles.numitrall , 'string')),0.00001,'false');
+                [ table, root, time, errorMsg , theoretical] = Bisection(fun,xl,xu,str2double(get(handles.numitrall , 'string')),0.00001,'false');
                 [ table1, root1, time1, errorMsg1] = FalsePosition(fun,xl,xu,str2double(get(handles.numitrall , 'string')),0.00001,'false');
-                [ table2, root2, time2, errorMsg2] = FixedPoint(fun,xi,str2double(get(handles.numitrall , 'string')),0.00001,'false');
+                [ table2, root2, time2, errorMsg2 , g , gDash] = FixedPoint(fun,xi,str2double(get(handles.numitrall , 'string')),0.00001,'false');
                 [ table3, root3, time3, errorMsg3] = NewtonRaphson(fun,xi,str2double(get(handles.numitrall , 'string')),0.00001,'false');
                 [ table4, root4, time4, errorMsg4] = NewtonRaphsonMultiplicity(fun,xi,str2double(get(handles.numitrall , 'string')),0.00001,'false',m);
                 [ table5, root5, time5, errorMsg5] = NewtonRaphsonModified(fun,xi,str2double(get(handles.numitrall , 'string')),0.00001,'false');
@@ -1749,9 +1749,9 @@ function resultall_Callback(hObject, eventdata, handles)
                         end 
                     %[ table, root, time, errorMsg] = Bisection(fun,xl,xu,str2double(get(handles.numitrbisection , 'string')),str2double(get(handles.errorbisection , 'string')),type);
                     
-                [ table, root, time, errorMsg] = Bisection(fun,xl,xu,str2double(get(handles.numitrall , 'string')),str2double(get(handles.errorall , 'string')),type);
+                [ table, root, time, errorMsg , theoretical] = Bisection(fun,xl,xu,str2double(get(handles.numitrall , 'string')),str2double(get(handles.errorall , 'string')),type);
                 [ table1, root1, time1, errorMsg1] = FalsePosition(fun,xl,xu,str2double(get(handles.numitrall , 'string')),str2double(get(handles.errorall , 'string')),type);
-                [ table2, root2, time2, errorMsg2] = FixedPoint(fun,xi,str2double(get(handles.numitrall , 'string')),str2double(get(handles.errorall , 'string')),type);
+                [ table2, root2, time2, errorMsg2 , g , gDash] = FixedPoint(fun,xi,str2double(get(handles.numitrall , 'string')),str2double(get(handles.errorall , 'string')),type);
                 [ table3, root3, time3, errorMsg3] = NewtonRaphson(fun,xi,str2double(get(handles.numitrall , 'string')),str2double(get(handles.errorall , 'string')),type);
                 [ table4, root4, time4, errorMsg4] = NewtonRaphsonMultiplicity(fun,xi,str2double(get(handles.numitrall , 'string')),str2double(get(handles.errorall , 'string')),type,m);
                 [ table5, root5, time5, errorMsg5] = NewtonRaphsonModified(fun,xi,str2double(get(handles.numitrall , 'string')),str2double(get(handles.errorall , 'string')),type);
@@ -1842,13 +1842,13 @@ function resultvita_Callback(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
-    if(~strcmp(get(handles.xvita , 'string'),'')  &&~strcmp(get(handles.fun , 'string'),'') )
+    if(~isempty(get(handles.xvita , 'string'))  &&~isempty(get(handles.fun , 'string')) )
             try
                 xi = str2double(get(handles.xvita , 'string'));
                 fun = get(handles.fun,'string');
-                if(strcmp(get(handles.numitrvita , 'string'),'') && strcmp(get(handles.errorvita , 'string'),''))
+                if(isempty(get(handles.numitrvita , 'string')) && isempty(get(handles.errorvita , 'string')))
                     [ table, root, time, errorMsg] = BirgeVieta(fun,xi,50,0.00001,'false');
-                elseif(strcmp(get(handles.numitrvita , 'string'),''))
+                elseif(isempty(get(handles.numitrvita , 'string')))
                         switch get(handles.typevita,'Value')   
                             case 1
                                 type = 'false';
@@ -1858,7 +1858,7 @@ function resultvita_Callback(hObject, eventdata, handles)
                         end 
                     [ table, root, time, errorMsg] = BirgeVieta(fun,xi,50,str2double(get(handles.errorvita , 'string')),type);
 
-                 elseif(strcmp(get(handles.errorvita , 'string'),''))
+                 elseif(isempty(get(handles.errorvita , 'string')))
                     [ table, root, time, errorMsg] = BirgeVieta(fun,xi,str2double(get(handles.numitrvita , 'string')),0.00001,'false');
 
                  else
