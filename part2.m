@@ -113,9 +113,11 @@ function jordon_Callback(hObject, eventdata, handles)
                 fun = get(handles.functions , 'string');
                 arr = strsplit(fun,';');
                 [ xj, timej, errorMsgj ] = GaussJordan(arr);
-                setappdata(0,'xj',xj);
-                setappdata(0,'timej',timej);
-                setappdata(0,'errorMsgj',errorMsgj);
+                setappdata(0,'x',xj);
+                setappdata(0,'time',timej);
+                setappdata(0,'errorMsg',errorMsgj);
+                setappdata(0,'method','jordon');
+                resultPart2;
             catch
                 set(handles.wrong , 'string', 'invalid input');
             end
@@ -135,9 +137,11 @@ function lu_Callback(hObject, eventdata, handles)
             fun = get(handles.functions , 'string');
             arr = strsplit(fun,';');
             [ xlu, timelu, errorMsglu ] = LUMatrix(arr);
-            setappdata(0,'xlu',xlu);
-            setappdata(0,'timelu',timelu);
-            setappdata(0,'errorMsglu',errorMsglu);
+            setappdata(0,'x',xlu);
+            setappdata(0,'time',timelu);
+            setappdata(0,'errorMsg',errorMsglu);
+            setappdata(0,'method','lu');
+            resultPart2;
         catch
             set(handles.wrong , 'string', 'invalid input');
         end
@@ -159,6 +163,8 @@ function elimination_Callback(hObject, eventdata, handles)
             setappdata(0,'x',x);
             setappdata(0,'time',time);
             setappdata(0,'errorMsg',errorMsg);
+            setappdata(0,'method','gauss');
+            resultPart2;
         catch
             set(handles.wrong , 'string', 'invalid input');
         end
@@ -283,10 +289,13 @@ function solve_Callback(hObject, eventdata, handles)
             num = str2double(get(handles.numitr , 'string'));
             [ xs,times,errorMsgs,tables ] = GaussSeidel( fun,initial ,num,error,type );
         end
-        setappdata(0,'xs',xs);
-        setappdata(0,'times',times);
-        setappdata(0,'errorMsgs',errorMsgs);
+        setappdata(0,'x',xs);
+        setappdata(0,'time',times);
+        setappdata(0,'errorMsg',errorMsgs);
         setappdata(0,'tables',tables);
+        setappdata(0,'method','seidel');
+        resultPart2;
+        
 
     else
         set(handles.wrong , 'string','input guess');

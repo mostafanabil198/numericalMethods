@@ -22,7 +22,7 @@ function varargout = resultFram(varargin)
 
 % Edit the above text to modify the response to help resultFram
 
-% Last Modified by GUIDE v2.5 05-May-2019 02:14:54
+% Last Modified by GUIDE v2.5 07-May-2019 18:11:10
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -81,6 +81,37 @@ function pre_Callback(hObject, eventdata, handles)
 % hObject    handle to pre (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
+    result = getappdata(0,'result');
+    table = result.table;
+    [k,j] = size(table);
+    i = getappdata(0 ,'i');
+    if(i > 1)
+    i = i -1;
+    setappdata(0,'i',i);
+    m = getappdata(0 , 'method');
+    fun = getappdata(0 , 'function');
+    f = getappdata(0 , 'fig');
+    if(strcmp(m,'bisection'))
+        BisectionPlot(fun , table,f);
+    elseif(strcmp(m,'falseposition'))
+        FalsePositionPlot(fun ,table,f);
+    elseif(strcmp(m,'fixedpoint'))
+        g = result.g;
+        FixedPointPlot(g,table,f);
+    elseif(strcmp(m,'newton'))
+        NewtonRaphsonPlot(fun,table,f);
+    elseif(strcmp(m,'newton1'))
+        NewtonRaphsonPlot(fun,table,f);
+    elseif(strcmp(m,'newton2'))
+        NewtonRaphsonPlot(fun,table,f);
+    elseif(strcmp(m,'secant'))
+        SecantPlot(fun,table,f);
+    elseif(strcmp(m,'secant1'))
+        SecantPlot(fun,table,f);
+    elseif(strcmp(m,'bergvita'))
+        NewtonRaphsonPlot(fun,table,f);
+    end
+    end
 
 
 % --- Executes on button press in next.
@@ -88,6 +119,39 @@ function next_Callback(hObject, eventdata, handles)
 % hObject    handle to next (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
+    result = getappdata(0,'result');
+    table = result.table;
+    [k,j] = size(table);
+    i = getappdata(0 ,'i');
+    if((i+1) <=  k)
+    i = i +1;
+    setappdata(0,'i',i);
+    m = getappdata(0 , 'method');
+    fun = getappdata(0 , 'function');
+    f = getappdata(0,'fig');
+    if(strcmp(m,'bisection'))
+        BisectionPlot(fun , table,f);
+    elseif(strcmp(m,'falseposition'))
+        FalsePositionPlot(fun , table ,f);
+    elseif(strcmp(m,'fixedpoint'))
+        g = result.g;
+        FixedPointPlot(g,table,f);
+    elseif(strcmp(m,'newton'))
+        NewtonRaphsonPlot(fun,table,f);
+    elseif(strcmp(m,'newton1'))
+        NewtonRaphsonPlot(fun,table,f);
+    elseif(strcmp(m,'newton2'))
+        NewtonRaphsonPlot(fun,table,f);
+    elseif(strcmp(m,'secant'))
+        SecantPlot(fun,table,f);
+    elseif(strcmp(m,'secant1'))
+        SecantPlot(fun,table,f);
+    elseif(strcmp(m,'bergvita'))
+        NewtonRaphsonPlot(fun,table,f);
+    end
+    end
+    
+    
 
 
 % --- Executes on button press in output.
@@ -95,6 +159,10 @@ function output_Callback(hObject, eventdata, handles)
 % hObject    handle to output (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
+    i = 0;
+    cf=figure;
+    setappdata(0,'fig',cf);
+    setappdata(0 , 'i' , i);
     m = getappdata(0,'method');
     uit = uitable(resultFram);
     uit.Tag = 'data';
@@ -164,6 +232,10 @@ function output_Callback(hObject, eventdata, handles)
        uit.ColumnWidth = {150,150,150,150,150,150};
        set(handles.theoretical ,'string' , result.theoretical);
        handles.all.Visible = 'on';
+       handles.graph1.Visible = 'on';
+       handles.graph2.Visible = 'on';
+       handles.next.Visible = 'off';
+       handles.pre.Visible = 'off';
     end
     %must close editable in this button !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
@@ -303,3 +375,40 @@ function all_CreateFcn(hObject, eventdata, handles)
 if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
     set(hObject,'BackgroundColor','white');
 end
+
+
+% --- Executes on button press in graph1.
+function graph1_Callback(hObject, eventdata, handles)
+% hObject    handle to graph1 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+        f = getappdata(0,'fig');
+        result = getappdata(0,'result');
+        table = result.table;
+        table1 = result.table1;
+        table2 = result.table2;
+        table3 = result.table3;
+        table4 = result.table4;
+        table5 = result.table5;
+        table6 = result.table6;
+        table7 = result.table7;
+        table8 = result.table8;
+        plotAllErrors(table,table1,table2,table3,table4,table5,table6,table7,table8,f);
+
+% --- Executes on button press in graph2.
+function graph2_Callback(hObject, eventdata, handles)
+% hObject    handle to graph2 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+        f = getappdata(0,'fig');
+        result = getappdata(0,'result');
+        table = result.table;
+        table1 = result.table1;
+        table2 = result.table2;
+        table3 = result.table3;
+        table4 = result.table4;
+        table5 = result.table5;
+        table6 = result.table6;
+        table7 = result.table7;
+        table8 = result.table8;
+        plotAllRoots(table,table1,table2,table3,table4,table5,table6,table7,table8,f);

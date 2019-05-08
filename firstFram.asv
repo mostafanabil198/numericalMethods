@@ -383,7 +383,7 @@ function resultbisection_Callback(hObject, eventdata, handles)
             fun = get(handles.fun,'string');
             setappdata(0,'function',fun);
             if(isempty(get(handles.numitrbisection , 'string')) && isempty(get(handles.errorbisection , 'string')))
-                [ table, root, time, errorMsg , theoretical] = Bisection(fun,xl,xu,50,0.00001,'false');
+                [ table, root, time, errorMsg , theoretical] = Bisection(fun,xl,xu,50,0.00001,'true');
             elseif(isempty(get(handles.numitrbisection , 'string')))
                     switch get(handles.typebisection,'Value')   
                         case 1
@@ -395,7 +395,7 @@ function resultbisection_Callback(hObject, eventdata, handles)
                 [ table, root, time, errorMsg , theoretical] = Bisection(fun,xl,xu,50,str2double(get(handles.errorbisection , 'string')),type);
                 
                 elseif(isempty(get(handles.errorbisection , 'string')))
-                [ table, root, time, errorMsg , theoretical] = Bisection(fun,xl,xu,str2double(get(handles.numitrbisection , 'string')),0.00001,'false');
+                [ table, root, time, errorMsg , theoretical] = Bisection(fun,xl,xu,str2double(get(handles.numitrbisection , 'string')),0.00001,'true');
                 
              else
                      switch get(handles.typebisection,'Value')   
@@ -552,7 +552,7 @@ function resultsecant1_Callback(hObject, eventdata, handles)
                 fun = get(handles.fun,'string');
                 setappdata(0,'function',fun);
                 if(isempty(get(handles.numitrsecant1 , 'string')) && isempty(get(handles.errorsecant1 , 'string')))
-                    [ table, root, time, errorMsg] = Secant(fun,xi,xminus,50,0.00001,'false');
+                    [ table, root, time, errorMsg] = Secant(fun,xi,xminus,50,0.00001,'true');
                 elseif(isempty(get(handles.numitrsecant1 , 'string')))
                         switch get(handles.typesecant1,'Value')   
                             case 1
@@ -564,7 +564,7 @@ function resultsecant1_Callback(hObject, eventdata, handles)
                     [ table, root, time, errorMsg] = Secant(fun,xi,xminus,50,str2double(get(handles.errorsecant1 , 'string')),type);
 
                     elseif(isempty(get(handles.errorsecant1 , 'string')))
-                    [ table, root, time, errorMsg] = Secant(fun,xi,xminus,str2double(get(handles.numitrsecant1 , 'string')),0.00001,'false');
+                    [ table, root, time, errorMsg] = Secant(fun,xi,xminus,str2double(get(handles.numitrsecant1 , 'string')),0.00001,'true');
 
                  else
                          switch get(handles.typesecant1,'Value')   
@@ -1776,7 +1776,7 @@ function resultall_Callback(hObject, eventdata, handles)
             setappdata(0,'function',fun);
             if(isempty(get(handles.numitrall , 'string')) && isempty(get(handles.errorall , 'string')))
                 [ table, root, time, errorMsg , theoretical] = Bisection(fun,xl,xu,50,0.00001,'false');
-                [ table1, root1, time1, errorMsg1] = FalsePosition(fun,xl,xu,50,0.00001,'false');
+                [ table1, root1, time1, errorMsg1] = falsePosition(fun,xl,xu,50,0.00001,'false');
                 [ table2, root2, time2, errorMsg2 , g , gDash] = FixedPoint(fun,xi,50,0.00001,'false');
                 [ table3, root3, time3, errorMsg3] = NewtonRaphson(fun,xi,50,0.00001,'false');
                 [ table4, root4, time4, errorMsg4] = NewtonRaphsonMultiplicity(fun,xi,50,0.00001,'false',m);
@@ -1795,7 +1795,7 @@ function resultall_Callback(hObject, eventdata, handles)
                 %[ table, root, time, errorMsg] = Bisection(fun,xl,xu,50,str2double(get(handles.errorbisection , 'string')),type);
                 
                 [ table, root, time, errorMsg , theoretical] = Bisection(fun,xl,xu,50,str2double(get(handles.errorall , 'string')),type);
-                [ table1, root1, time1, errorMsg1] = FalsePosition(fun,xl,xu,50,str2double(get(handles.errorall , 'string')),type);
+                [ table1, root1, time1, errorMsg1] = falsePosition(fun,xl,xu,50,str2double(get(handles.errorall , 'string')),type);
                 [ table2, root2, time2, errorMsg2 , g , gDash] = FixedPoint(fun,xi,50,str2double(get(handles.errorall , 'string')),type);
                 [ table3, root3, time3, errorMsg3] = NewtonRaphson(fun,xi,50,str2double(get(handles.errorall , 'string')),type);
                 [ table4, root4, time4, errorMsg4] = NewtonRaphsonMultiplicity(fun,xi,50,str2double(get(handles.errorall , 'string')),type,m);
@@ -1808,7 +1808,7 @@ function resultall_Callback(hObject, eventdata, handles)
                 %[ table, root, time, errorMsg] = Bisection(fun,xl,xu,str2double(get(handles.numitrbisection , 'string')),0.00001,'false');
                 s = 'not all'
                 [ table, root, time, errorMsg , theoretical] = Bisection(fun,xl,xu,str2double(get(handles.numitrall , 'string')),0.00001,'false');
-                [ table1, root1, time1, errorMsg1] = FalsePosition(fun,xl,xu,str2double(get(handles.numitrall , 'string')),0.00001,'false');
+                [ table1, root1, time1, errorMsg1] = falsePosition(fun,xl,xu,str2double(get(handles.numitrall , 'string')),0.00001,'false');
                 [ table2, root2, time2, errorMsg2 , g , gDash] = FixedPoint(fun,xi,str2double(get(handles.numitrall , 'string')),0.00001,'false');
                 [ table3, root3, time3, errorMsg3] = NewtonRaphson(fun,xi,str2double(get(handles.numitrall , 'string')),0.00001,'false');
                 [ table4, root4, time4, errorMsg4] = NewtonRaphsonMultiplicity(fun,xi,str2double(get(handles.numitrall , 'string')),0.00001,'false',m);
@@ -1830,7 +1830,7 @@ function resultall_Callback(hObject, eventdata, handles)
                     
                 [ table, root, time, errorMsg , theoretical] = Bisection(fun,xl,xu,str2double(get(handles.numitrall , 'string')),str2double(get(handles.errorall , 'string')),type);
                 [ table1, root1, time1, errorMsg1] = FalsePosition(fun,xl,xu,str2double(get(handles.numitrall , 'string')),str2double(get(handles.errorall , 'string')),type);
-                [ table2, root2, time2, errorMsg2 , g , gDash] = FixedPoint(fun,xi,str2double(get(handles.numitrall , 'string')),str2double(get(handles.errorall , 'string')),type);
+                [ table2, root2, time2, errorMsg2 , g , gDash] = fixedPoint(fun,xi,str2double(get(handles.numitrall , 'string')),str2double(get(handles.errorall , 'string')),type);
                 [ table3, root3, time3, errorMsg3] = NewtonRaphson(fun,xi,str2double(get(handles.numitrall , 'string')),str2double(get(handles.errorall , 'string')),type);
                 [ table4, root4, time4, errorMsg4] = NewtonRaphsonMultiplicity(fun,xi,str2double(get(handles.numitrall , 'string')),str2double(get(handles.errorall , 'string')),type,m);
                 [ table5, root5, time5, errorMsg5] = NewtonRaphsonModified(fun,xi,str2double(get(handles.numitrall , 'string')),str2double(get(handles.errorall , 'string')),type);

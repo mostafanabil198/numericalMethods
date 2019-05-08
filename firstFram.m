@@ -383,7 +383,7 @@ function resultbisection_Callback(hObject, eventdata, handles)
             fun = get(handles.fun,'string');
             setappdata(0,'function',fun);
             if(isempty(get(handles.numitrbisection , 'string')) && isempty(get(handles.errorbisection , 'string')))
-                [ table, root, time, errorMsg , theoretical] = Bisection(fun,xl,xu,50,0.00001,'false');
+                [ table, root, time, errorMsg , theoretical] = Bisection(fun,xl,xu,50,0.00001,'true');
             elseif(isempty(get(handles.numitrbisection , 'string')))
                     switch get(handles.typebisection,'Value')   
                         case 1
@@ -395,7 +395,7 @@ function resultbisection_Callback(hObject, eventdata, handles)
                 [ table, root, time, errorMsg , theoretical] = Bisection(fun,xl,xu,50,str2double(get(handles.errorbisection , 'string')),type);
                 
                 elseif(isempty(get(handles.errorbisection , 'string')))
-                [ table, root, time, errorMsg , theoretical] = Bisection(fun,xl,xu,str2double(get(handles.numitrbisection , 'string')),0.00001,'false');
+                [ table, root, time, errorMsg , theoretical] = Bisection(fun,xl,xu,str2double(get(handles.numitrbisection , 'string')),0.00001,'true');
                 
              else
                      switch get(handles.typebisection,'Value')   
@@ -552,7 +552,7 @@ function resultsecant1_Callback(hObject, eventdata, handles)
                 fun = get(handles.fun,'string');
                 setappdata(0,'function',fun);
                 if(isempty(get(handles.numitrsecant1 , 'string')) && isempty(get(handles.errorsecant1 , 'string')))
-                    [ table, root, time, errorMsg] = Secant(fun,xi,xminus,50,0.00001,'false');
+                    [ table, root, time, errorMsg] = Secant(fun,xi,xminus,50,0.00001,'true');
                 elseif(isempty(get(handles.numitrsecant1 , 'string')))
                         switch get(handles.typesecant1,'Value')   
                             case 1
@@ -564,7 +564,7 @@ function resultsecant1_Callback(hObject, eventdata, handles)
                     [ table, root, time, errorMsg] = Secant(fun,xi,xminus,50,str2double(get(handles.errorsecant1 , 'string')),type);
 
                     elseif(isempty(get(handles.errorsecant1 , 'string')))
-                    [ table, root, time, errorMsg] = Secant(fun,xi,xminus,str2double(get(handles.numitrsecant1 , 'string')),0.00001,'false');
+                    [ table, root, time, errorMsg] = Secant(fun,xi,xminus,str2double(get(handles.numitrsecant1 , 'string')),0.00001,'true');
 
                  else
                          switch get(handles.typesecant1,'Value')   
@@ -741,7 +741,7 @@ function resultsecant2_Callback(hObject, eventdata, handles)
                 fun = get(handles.fun,'string');
                 setappdata(0,'function',fun);
                 if(isempty(get(handles.numitrsecant2 , 'string')) && isempty(get(handles.errorsecant2 , 'string')))
-                    [ table, root, time, errorMsg] = ModifiedSecant(fun,xi,delta,50,0.00001,'false');
+                    [ table, root, time, errorMsg] = ModifiedSecant(fun,xi,delta,50,0.00001,'true');
                 elseif(isempty(get(handles.numitrsecant2 , 'string')))
                         switch get(handles.typesecant2,'Value')   
                             case 1
@@ -753,7 +753,7 @@ function resultsecant2_Callback(hObject, eventdata, handles)
                     [ table, root, time, errorMsg] = ModifiedSecant(fun,xi,delta,50,str2double(get(handles.errorsecant2 , 'string')),type);
 
                     elseif(isempty(get(handles.errorsecant2 , 'string')))
-                    [ table, root, time, errorMsg] = ModifiedSecant(fun,xi,delta,str2double(get(handles.numitrsecant2 , 'string')),0.00001,'false');
+                    [ table, root, time, errorMsg] = ModifiedSecant(fun,xi,delta,str2double(get(handles.numitrsecant2 , 'string')),0.00001,'true');
 
                  else
                          switch get(handles.typesecant2,'Value')   
@@ -883,7 +883,7 @@ function resultnewton_Callback(hObject, eventdata, handles)
                 fun = get(handles.fun,'string');
                 setappdata(0,'function',fun);
                 if(isempty(get(handles.numitrnewton , 'string')) && isempty(get(handles.errornewton , 'string')))
-                    [ table, root, time, errorMsg] = NewtonRaphson(fun,xi,50,0.00001,'false');
+                    [ table, root, time, errorMsg] = NewtonRaphson(fun,xi,50,0.00001,'true');
                 elseif(isempty(get(handles.numitrnewton , 'string')))
                         switch get(handles.typenewton,'Value')   
                             case 1
@@ -895,7 +895,7 @@ function resultnewton_Callback(hObject, eventdata, handles)
                     [ table, root, time, errorMsg] = NewtonRaphson(fun,xi,50,str2double(get(handles.errornewton , 'string')),type);
 
                     elseif(isempty(get(handles.errornewton , 'string')))
-                    [ table, root, time, errorMsg] = NewtonRaphson(fun,xi,str2double(get(handles.numitrnewton , 'string')),0.00001,'false');
+                    [ table, root, time, errorMsg] = NewtonRaphson(fun,xi,str2double(get(handles.numitrnewton , 'string')),0.00001,'true');
 
                  else
                          switch get(handles.typenewton,'Value')   
@@ -1026,7 +1026,7 @@ function resultnewton1_Callback(hObject, eventdata, handles)
                 fun = get(handles.fun,'string');
                 setappdata(0,'function',fun);
                 if(isempty(get(handles.numitrnewton1 , 'string')) && isempty(get(handles.errornewton1 , 'string')))
-                    [ table, root, time, errorMsg] = NewtonRaphsonMultiplicity(fun,xi,50,0.00001,'false',m);
+                    [ table, root, time, errorMsg] = NewtonRaphsonMultiplicity(fun,xi,50,0.00001,'true',m);
                 elseif(isempty(get(handles.numitrnewton1 , 'string')))
                         switch get(handles.typenewton1,'Value')   
                             case 1
@@ -1038,7 +1038,7 @@ function resultnewton1_Callback(hObject, eventdata, handles)
                     [ table, root, time, errorMsg] = NewtonRaphsonMultiplicity(fun,xi,50,str2double(get(handles.errornewton1 , 'string')),type,m);
 
                     elseif(isempty(get(handles.errornewton1 , 'string')))
-                    [ table, root, time, errorMsg] = NewtonRaphsonMultiplicity(fun,xi,str2double(get(handles.numitrnewton1 , 'string')),0.00001,'false',m);
+                    [ table, root, time, errorMsg] = NewtonRaphsonMultiplicity(fun,xi,str2double(get(handles.numitrnewton1 , 'string')),0.00001,'true',m);
 
                  else
                          switch get(handles.typenewton1,'Value')   
@@ -1191,7 +1191,7 @@ function resultnewton2_Callback(hObject, eventdata, handles)
                 fun = get(handles.fun,'string');
                 setappdata(0,'function',fun);
                 if(isempty(get(handles.numitrnewton2 , 'string')) && isempty(get(handles.errornewton2 , 'string')))
-                    [ table, root, time, errorMsg] = NewtonRaphsonModified(fun,xi,50,0.00001,'false');
+                    [ table, root, time, errorMsg] = NewtonRaphsonModified(fun,xi,50,0.00001,'true');
                 elseif(isempty(get(handles.numitrnewton2 , 'string')))
                         switch get(handles.typenewton2,'Value')   
                             case 1
@@ -1203,7 +1203,7 @@ function resultnewton2_Callback(hObject, eventdata, handles)
                     [ table, root, time, errorMsg] = NewtonRaphsonModified(fun,xi,50,str2double(get(handles.errornewton2 , 'string')),type);
 
                     elseif(isempty(get(handles.errornewton2 , 'string')))
-                    [ table, root, time, errorMsg] = NewtonRaphsonModified(fun,xi,str2double(get(handles.numitrnewton2 , 'string')),0.00001,'false');
+                    [ table, root, time, errorMsg] = NewtonRaphsonModified(fun,xi,str2double(get(handles.numitrnewton2 , 'string')),0.00001,'true');
 
                  else
                          switch get(handles.typenewton2,'Value')   
@@ -1335,7 +1335,7 @@ function resultfixed_Callback(hObject, eventdata, handles)
                 fun = get(handles.fun,'string');
                 setappdata(0,'function',fun);
                 if(isempty(get(handles.numitrfixed , 'string')) && isempty(get(handles.errorfixed , 'string')))
-                    [ table, root, time, errorMsg , g , gDash] = fixedPoint(fun,xi,50,0.00001,'false');
+                    [ table, root, time, errorMsg , g , gDash] = fixedPoint(fun,xi,50,0.00001,'true');
                 elseif(isempty(get(handles.numitrfixed , 'string')))
                         switch get(handles.typefixed,'Value')   
                             case 1
@@ -1347,7 +1347,7 @@ function resultfixed_Callback(hObject, eventdata, handles)
                     [ table, root, time, errorMsg , g , gDash] = fixedPoint(fun,xi,50,str2double(get(handles.errorfixed , 'string')),type);
 
                     elseif(isempty(get(handles.errorfixed , 'string')))
-                    [ table, root, time, errorMsg , g , gDash] = fixedPoint(fun,xi,str2double(get(handles.numitrfixed , 'string')),0.00001,'false');
+                    [ table, root, time, errorMsg , g , gDash] = fixedPoint(fun,xi,str2double(get(handles.numitrfixed , 'string')),0.00001,'true');
 
                  else
                          switch get(handles.typefixed,'Value')   
@@ -1483,7 +1483,7 @@ function resultfalse_Callback(hObject, eventdata, handles)
             fun = get(handles.fun,'string');
             setappdata(0,'function',fun);
             if(isempty(get(handles.numitrfalse , 'string')) && isempty(get(handles.errorfalse , 'string')))
-                [ table, root, time, errorMsg] = FalsePosition(fun,xl,xu,50,0.00001,'false');
+                [ table, root, time, errorMsg] = FalsePosition(fun,xl,xu,50,0.00001,'true');
             elseif(isempty(get(handles.numitrfalse , 'string')))
                     switch get(handles.typefalse,'Value')   
                         case 1
@@ -1495,7 +1495,7 @@ function resultfalse_Callback(hObject, eventdata, handles)
                 [ table, root, time, errorMsg] = FalsePosition(fun,xl,xu,50,str2double(get(handles.errorfalse , 'string')),type);
                 
                 elseif(isempty(get(handles.errorfalse , 'string')))
-                [ table, root, time, errorMsg] = FalsePosition(fun,xl,xu,str2double(get(handles.numitrfalse , 'string')),0.00001,'false');
+                [ table, root, time, errorMsg] = FalsePosition(fun,xl,xu,str2double(get(handles.numitrfalse , 'string')),0.00001,'true');
                 
              else
                      switch get(handles.typefalse,'Value')   
@@ -1775,15 +1775,15 @@ function resultall_Callback(hObject, eventdata, handles)
             fun = get(handles.fun,'string');
             setappdata(0,'function',fun);
             if(isempty(get(handles.numitrall , 'string')) && isempty(get(handles.errorall , 'string')))
-                [ table, root, time, errorMsg , theoretical] = Bisection(fun,xl,xu,50,0.00001,'false');
-                [ table1, root1, time1, errorMsg1] = falsePosition(fun,xl,xu,50,0.00001,'false');
-                [ table2, root2, time2, errorMsg2 , g , gDash] = FixedPoint(fun,xi,50,0.00001,'false');
-                [ table3, root3, time3, errorMsg3] = NewtonRaphson(fun,xi,50,0.00001,'false');
-                [ table4, root4, time4, errorMsg4] = NewtonRaphsonMultiplicity(fun,xi,50,0.00001,'false',m);
-                [ table5, root5, time5, errorMsg5] = NewtonRaphsonModified(fun,xi,50,0.00001,'false');
-                [ table6, root6, time6, errorMsg6] = Secant(fun,xi,xminus,50,0.00001,'false');
-                [ table7, root7, time7, errorMsg7] = ModifiedSecant(fun,xi,delta,50,0.00001,'false');
-                [ table8, root8, time8, errorMsg8] = BirgeVieta(fun,xi,50,0.00001,'false');
+                [ table, root, time, errorMsg , theoretical] = Bisection(fun,xl,xu,50,0.00001,'true');
+                [ table1, root1, time1, errorMsg1] = falsePosition(fun,xl,xu,50,0.00001,'true');
+                [ table2, root2, time2, errorMsg2 , g , gDash] = FixedPoint(fun,xi,50,0.00001,'true');
+                [ table3, root3, time3, errorMsg3] = NewtonRaphson(fun,xi,50,0.00001,'true');
+                [ table4, root4, time4, errorMsg4] = NewtonRaphsonMultiplicity(fun,xi,50,0.00001,'true',m);
+                [ table5, root5, time5, errorMsg5] = NewtonRaphsonModified(fun,xi,50,0.00001,'true');
+                [ table6, root6, time6, errorMsg6] = Secant(fun,xi,xminus,50,0.00001,'true');
+                [ table7, root7, time7, errorMsg7] = ModifiedSecant(fun,xi,delta,50,0.00001,'true');
+                [ table8, root8, time8, errorMsg8] = BirgeVieta(fun,xi,50,0.00001,'true');
             elseif(isempty(get(handles.numitrall , 'string')))
                     switch get(handles.typeall,'Value')   
                         case 1
@@ -1807,15 +1807,15 @@ function resultall_Callback(hObject, eventdata, handles)
                 elseif(isempty(get(handles.errorall , 'string')))
                 %[ table, root, time, errorMsg] = Bisection(fun,xl,xu,str2double(get(handles.numitrbisection , 'string')),0.00001,'false');
                 s = 'not all'
-                [ table, root, time, errorMsg , theoretical] = Bisection(fun,xl,xu,str2double(get(handles.numitrall , 'string')),0.00001,'false');
-                [ table1, root1, time1, errorMsg1] = falsePosition(fun,xl,xu,str2double(get(handles.numitrall , 'string')),0.00001,'false');
-                [ table2, root2, time2, errorMsg2 , g , gDash] = FixedPoint(fun,xi,str2double(get(handles.numitrall , 'string')),0.00001,'false');
-                [ table3, root3, time3, errorMsg3] = NewtonRaphson(fun,xi,str2double(get(handles.numitrall , 'string')),0.00001,'false');
-                [ table4, root4, time4, errorMsg4] = NewtonRaphsonMultiplicity(fun,xi,str2double(get(handles.numitrall , 'string')),0.00001,'false',m);
-                [ table5, root5, time5, errorMsg5] = NewtonRaphsonModified(fun,xi,str2double(get(handles.numitrall , 'string')),0.00001,'false');
-                [ table6, root6, time6, errorMsg6] = Secant(fun,xi,xminus,str2double(get(handles.numitrall , 'string')),0.00001,'false');
-                [ table7, root7, time7, errorMsg7] = ModifiedSecant(fun,xi,delta,str2double(get(handles.numitrall , 'string')),0.00001,'false');
-                [ table8, root8, time8, errorMsg8] = BirgeVieta(fun,xi,str2double(get(handles.numitrall , 'string')),0.00001,'false');
+                [ table, root, time, errorMsg , theoretical] = Bisection(fun,xl,xu,str2double(get(handles.numitrall , 'string')),0.00001,'true');
+                [ table1, root1, time1, errorMsg1] = falsePosition(fun,xl,xu,str2double(get(handles.numitrall , 'string')),0.00001,'true');
+                [ table2, root2, time2, errorMsg2 , g , gDash] = FixedPoint(fun,xi,str2double(get(handles.numitrall , 'string')),0.00001,'true');
+                [ table3, root3, time3, errorMsg3] = NewtonRaphson(fun,xi,str2double(get(handles.numitrall , 'string')),0.00001,'true');
+                [ table4, root4, time4, errorMsg4] = NewtonRaphsonMultiplicity(fun,xi,str2double(get(handles.numitrall , 'string')),0.00001,'true',m);
+                [ table5, root5, time5, errorMsg5] = NewtonRaphsonModified(fun,xi,str2double(get(handles.numitrall , 'string')),0.00001,'true');
+                [ table6, root6, time6, errorMsg6] = Secant(fun,xi,xminus,str2double(get(handles.numitrall , 'string')),0.00001,'true');
+                [ table7, root7, time7, errorMsg7] = ModifiedSecant(fun,xi,delta,str2double(get(handles.numitrall , 'string')),0.00001,'true');
+                [ table8, root8, time8, errorMsg8] = BirgeVieta(fun,xi,str2double(get(handles.numitrall , 'string')),0.00001,'true');
                 
             else
                  s = 'all'
@@ -1977,7 +1977,7 @@ function resultvita_Callback(hObject, eventdata, handles)
                 fun = get(handles.fun,'string');
                 setappdata(0,'function',fun);
                 if(isempty(get(handles.numitrvita , 'string')) && isempty(get(handles.errorvita , 'string')))
-                    [ table, root, time, errorMsg] = BirgeVieta(fun,xi,50,0.00001,'false');
+                    [ table, root, time, errorMsg] = BirgeVieta(fun,xi,50,0.00001,'true');
                 elseif(isempty(get(handles.numitrvita , 'string')))
                         switch get(handles.tybevita,'Value')   
                             case 1
@@ -1989,7 +1989,7 @@ function resultvita_Callback(hObject, eventdata, handles)
                     [ table, root, time, errorMsg] = BirgeVieta(fun,xi,50,str2double(get(handles.errorvita , 'string')),type);
 
                  elseif(isempty(get(handles.errorvita , 'string')))
-                    [ table, root, time, errorMsg] = BirgeVieta(fun,xi,str2double(get(handles.numitrvita , 'string')),0.00001,'false');
+                    [ table, root, time, errorMsg] = BirgeVieta(fun,xi,str2double(get(handles.numitrvita , 'string')),0.00001,'true');
 
                  else
                          switch get(handles.tybevita,'Value')   

@@ -1,4 +1,4 @@
-function [] = SecantPlot( fun, xPrev1,xprev,xr )
+function [] = SecantPlot( fun, xPrev1,xPrev,xr,cf )
 %UNTITLED5 Summary of this function goes here
 %   Detailed explanation goes here
 syms x;
@@ -6,7 +6,7 @@ f(x)=sym(fun);
 fxPrev1=f(xPrev1);
 fxPrev=f(xPrev);
 fxr=f(xr);
-figure;
+figure(cf);
 clf;
 grid on;
 ezplot(f(x),[xr-5:0.1:xr+5])

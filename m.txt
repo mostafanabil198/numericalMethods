@@ -1,7 +1,6 @@
-
-syms a b c d e f g h i j k l m n o p k r s t u v w x y z x0 x1 x2 x3 x4 x5 x6 x7 x8 x9 a0 a1 a2 a3 a4 a5 a6 a7 a8 a9 y0 y1 y2 y3 y4 y5 y6 y7 y8 y9;
-eqns1 = [];
-for i=1:size(eqns(:),1)
-    eqns1 = [eqns1,sym(eqns(1,i))]
-end
-eqns = eqns1;
+3
+3*a + 2*b + c - 6
+2*a + 3*b - 7
+2*c - 4
+seidel
+1 1.1 2

@@ -1,7 +1,7 @@
-function [] = plotAllErrors(  bisection,falsePosition,fixedPoint,newtonRaphson,newtonRaphsonModified,secant,secantModified)
+function [] = plotAllErrors(  bisection,falsePosition,fixedPoint,newtonRaphson,newtonMultiplicity,newtonRaphsonModified,secant,secantModified,birgeVieta,cf)
 %UNTITLED8 Summary of this function goes here
 %   Detailed explanation goes here
-figure;
+figure(cf);
 clf;
 grid on;
 xlabel('Iterations')
@@ -15,11 +15,15 @@ plot(fixedPoint(:,1), fixedPoint(:,4));
 hold on;
 plot(newtonRaphson(:,1), newtonRaphson(:,6));
 hold on;
+plot(newtonMultiplicity(:,1), newtonMultiplicity(:,6));
+hold on;
 plot(newtonRaphsonModified(:,1), newtonRaphsonModified(:,7));
 hold on;
 plot(secant(:,1), secant(:,7));
 hold on;
 plot(secantModified(:,1), secantModified(:,7));
-legend({'Bisection','False Position','Fixed Point','Newton Raphson','Modified Newton Raphson','Secant','Modified Secant'},'Location','southwest')
+plot(birgeVieta(:,1), birgeVieta(:,6));
+hold on;
+legend({'Bisection','False Position','Fixed Point','Newton Raphson','Newton with multiplicty','Modified Newton Raphson','Secant','Modified Secant','Birge Vieta'},'Location','southwest')
 end
 

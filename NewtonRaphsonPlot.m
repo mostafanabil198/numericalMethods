@@ -1,4 +1,4 @@
-function [] = NewtonRaphsonPlot( fun,xr )
+function [] = NewtonRaphsonPlot( fun,xr,cf )
 %UNTITLED4 Summary of this function goes here
 %   Detailed explanation goes here
 syms x;
@@ -6,7 +6,7 @@ f(x)=sym(fun);
 fDash(x)=diff(f,x);
 slope=fDash(xr);
 y=slope*(x-xr)+f(xr);
-figure;
+figure(cf);
 clf;
 grid on;
 ezplot(f(x),[xr-5:0.1:xr+5])

@@ -1,11 +1,13 @@
-function [ ] = BisectionPlot( fun,xl,xu,xr )
+function [ ] = BisectionPlot( fun,xl,xu,xr,cf )
 %UNTITLED Summary of this function goes here
 %   Detailed explanation goes here
 syms x;
 f(x)=sym(fun);
-figure;
+figure(cf);
 clf;
 grid on;
+xl
+xu
 ezplot(f(x),[xl-1:0.1:xu+1])
 hold on;
 ylim([-10 10])

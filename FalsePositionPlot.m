@@ -1,11 +1,11 @@
-function [] = FalsePositionPlot( fun,xl,xu,xr )
+function [] = FalsePositionPlot( fun,xl,xu,xr,cf )
 %UNTITLED2 Summary of this function goes here
 %   Detailed explanation goes here
 syms x;
 f(x)=sym(fun);
 fxl=f(xl);
 fxu=f(xu);
-figure;
+figure(cf);
 clf;
 grid on;
 ezplot(f(x),[xl-1:0.1:xu+1])

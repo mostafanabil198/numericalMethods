@@ -22,7 +22,7 @@ function varargout = numerical_app(varargin)
 
 % Edit the above text to modify the response to help numerical_app
 
-% Last Modified by GUIDE v2.5 05-May-2019 22:35:59
+% Last Modified by GUIDE v2.5 06-May-2019 00:08:07
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -90,18 +90,18 @@ function part2_Callback(hObject, eventdata, handles)
 
 
 
-function filename_Callback(hObject, eventdata, handles)
-% hObject    handle to filename (see GCBO)
+function hoho_Callback(hObject, eventdata, handles)
+% hObject    handle to hoho (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
-% Hints: get(hObject,'String') returns contents of filename as text
-%        str2double(get(hObject,'String')) returns contents of filename as a double
+% Hints: get(hObject,'String') returns contents of hoho as text
+%        str2double(get(hObject,'String')) returns contents of hoho as a double
 
 
 % --- Executes during object creation, after setting all properties.
-function filename_CreateFcn(hObject, eventdata, handles)
-% hObject    handle to filename (see GCBO)
+function hoho_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to hoho (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    empty - handles not created until after all CreateFcns called
 
@@ -117,12 +117,12 @@ function part1file_Callback(hObject, eventdata, handles)
 % hObject    handle to part1file (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-    if(~isempty(get(handles.filename , 'string')))
+    if(~isempty(get(handles.hoho , 'string')))
         result = struct();
-        name = get(handles.filename , 'string');
+        name = get(handles.hoho , 'string');
         [ fun, method, interval, numOfIterations, eps, epsType  ] = readFile( name );
         switch method
-            case 'Bisection'
+            case 'bisection'
                 [ table, root, time, errorMsg , theoretical] = Bisection(fun,interval(1,1),interval(1,2),numOfIterations,eps,epsType);
                 result.table = table;
                 result.time = time;
@@ -200,3 +200,40 @@ function part2file_Callback(hObject, eventdata, handles)
 % hObject    handle to part2file (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
+
+    if(~isempty(get(handles.hoho , 'string')))
+        result = struct();
+        name = get(handles.hoho , 'string');
+        [ fun, method, interval, numOfIterations, eps, epsType  ] = readFile2( name );
+        switch method
+            case 'gaussJordon'
+                [ xj, timej, errorMsgj ] = GaussJordan(fun);
+                setappdata(0,'x',xj);
+                setappdata(0,'time',timej);
+                setappdata(0,'errorMsg',errorMsgj);
+                setappdata(0,'method','jordon');
+            case 'gaussElimination'
+                [ x, time, errorMsg ] = GaussElimination(fun);
+                setappdata(0,'x',x);
+                setappdata(0,'time',time);
+                setappdata(0,'errorMsg',errorMsg);
+                setappdata(0,'method','gauss');
+            case 'lu'
+                [ xlu, timelu, errorMsglu ] = LUMatrix(fun);
+                setappdata(0,'x',xlu);
+                setappdata(0,'time',timelu);
+                setappdata(0,'errorMsg',errorMsglu);
+                setappdata(0,'method','lu');
+            case 'seidel'
+                [ xs,times,errorMsgs,tables ] = GaussSeidel( fun,interval ,numOfIterations,eps,epsType );
+                setappdata(0,'x',xs);
+                setappdata(0,'time',times);
+                setappdata(0,'errorMsg',errorMsgs);
+                setappdata(0,'tables',tables);
+                setappdata(0,'method','seidel');
+            otherwise
+        end
+            setappdata(0,'result',result);
+            resultPart2;
+    end
+

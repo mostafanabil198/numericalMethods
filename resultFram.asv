@@ -22,7 +22,7 @@ function varargout = resultFram(varargin)
 
 % Edit the above text to modify the response to help resultFram
 
-% Last Modified by GUIDE v2.5 05-May-2019 02:14:54
+% Last Modified by GUIDE v2.5 07-May-2019 17:06:31
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -81,6 +81,28 @@ function pre_Callback(hObject, eventdata, handles)
 % hObject    handle to pre (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
+    result = getappdata(0,'result');
+    table = result.table;
+    [k,j] = size(table);
+    i = getappdata(0 ,'i');
+    if(i > 1)
+    i = i -1;
+    setappdata(0,'i',i);
+    m = getappdata(0 , 'method');
+    fun = getappdata(0 , 'function');
+    f = getappdata(0 , 'fig');
+    if(strcmp(m,'bisection'))
+        BisectionPlot(fun , double(table(i , 2)), double(table(i , 3)),double(table(i , 4)),f);
+    elseif(strcmp(m,'falseposition'))
+    elseif(strcmp(m,'fixedpoint'))
+    elseif(strcmp(m,'newton'))
+    elseif(strcmp(m,'newton1'))
+    elseif(strcmp(m,'newton2'))
+    elseif(strcmp(m,'secant'))
+    elseif(strcmp(m,'secant1'))
+    elseif(strcmp(m,'bergvita'))
+    end
+    end
 
 
 % --- Executes on button press in next.
@@ -88,6 +110,39 @@ function next_Callback(hObject, eventdata, handles)
 % hObject    handle to next (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
+    result = getappdata(0,'result');
+    table = result.table;
+    [k,j] = size(table);
+    i = getappdata(0 ,'i');
+    if((i+1) <=  k)
+    i = i +1;
+    setappdata(0,'i',i);
+    m = getappdata(0 , 'method');
+    fun = getappdata(0 , 'function');
+    f = getappdata(0,'fig');
+    if(strcmp(m,'bisection'))
+        BisectionPlot(fun , double(table(i , 2)), double(table(i , 3)),double(table(i , 4)),f);
+    elseif(strcmp(m,'falseposition'))
+        FalsePositionPlot(fun , double(table(i , 2)), double(table(i , 3)),double(table(i , 4)),f);
+    elseif(strcmp(m,'fixedpoint'))
+        g = result.g;
+        FixedPointPlot(g,double(table(i , 3)),f);
+    elseif(strcmp(m,'newton'))
+        NewtonRaphsonPlot(fun,double(table(i , 3)),f);
+    elseif(strcmp(m,'newton1'))
+        NewtonRaphsonPlot(fun,double(table(i , 3)),f);
+    elseif(strcmp(m,'newton2'))
+        NewtonRaphsonPlot(fun,double(table(i , 3)),f);
+    elseif(strcmp(m,'secant'))
+        SecantPlot(fun,double(table(i , 2)) ,double(table(i , 3)), double(table(i , 6)),f);
+    elseif(strcmp(m,'secant1'))
+        SecantPlot(fun,double(table(i , 2)) ,double(table(i , 3)), double(table(i , 6)),f);
+    elseif(strcmp(m,'bergvita'))
+        NewtonRaphsonPlot(fun,double(table(i , 5)),f);
+    end
+    end
+    
+    
 
 
 % --- Executes on button press in output.
@@ -95,6 +150,10 @@ function output_Callback(hObject, eventdata, handles)
 % hObject    handle to output (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
+    i = 0;
+    cf=figure;
+    setappdata(0,'fig',cf);
+    setappdata(0 , 'i' , i);
     m = getappdata(0,'method');
     uit = uitable(resultFram);
     uit.Tag = 'data';
@@ -164,7 +223,12 @@ function output_Callback(hObject, eventdata, handles)
        uit.ColumnWidth = {150,150,150,150,150,150};
        set(handles.theoretical ,'string' , result.theoretical);
        handles.all.Visible = 'on';
+       handles.graph1.Visible = 'on';
+       handles.graph2.Visible = 'on';
+       handles.next.Visible = 'off';
+       handles.pre.Visible = 'off';
     end
+    %must close editable in this button !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 
 % --- Executes on selection change in all.
@@ -226,7 +290,7 @@ function all_Callback(hObject, eventdata, handles)
         case 'NewtonRaphson'
            table = result.table3
            %[k,j] = size(table);
-       uit.Position = [50 300 6*150+25 200];
+           uit.Position = [50 300 6*150+25 200];
            uit.Data = table;
            set(handles.root ,'string' , result.root3);
            set(handles.time ,'string' , result.time3);
@@ -235,8 +299,8 @@ function all_Callback(hObject, eventdata, handles)
            uit.ColumnWidth = {150,150,150,150,150,150};
         case 'NewtonModified1'
            table = result.table4
-           [k,j] = size(table);
-           uit.Position = [50 300 j*150+25 200];
+           %[k,j] = size(table);
+           uit.Position = [50 300 6*150+25 200];
            uit.Data = table;
            set(handles.root ,'string' , result.root4);
            set(handles.time ,'string' , result.time4);
@@ -245,8 +309,8 @@ function all_Callback(hObject, eventdata, handles)
            uit.ColumnWidth = {150,150,150,150,150,150};
         case 'NewtonModified2'
            table = result.table5
-           [k,j] = size(table);
-           uit.Position = [50 300 j*150+25 200];
+           %[k,j] = size(table);
+           uit.Position = [50 300 6*150+25 200];
            uit.Data = table;
            set(handles.root ,'string' , result.root5);
            set(handles.time ,'string' , result.time5);
@@ -255,8 +319,8 @@ function all_Callback(hObject, eventdata, handles)
            uit.ColumnWidth = {128,128,128,128,128,128,128};
         case 'Secant'
            table = result.table6
-           [k,j] = size(table);
-           uit.Position = [50 300 j*150+25 200];
+          % [k,j] = size(table);
+           uit.Position = [50 300 6*150+25 200];
            uit.Data = table;
            set(handles.root ,'string' , result.root6);
            set(handles.time ,'string' , result.time6);
@@ -265,8 +329,8 @@ function all_Callback(hObject, eventdata, handles)
            uit.ColumnWidth = {128,128,128,128,128,128,128};
         case 'SecantModified'
            table = result.table7
-           [k,j] = size(table);
-           uit.Position = [50 300 j*150+25 200];
+           %[k,j] = size(table);
+           uit.Position = [50 300 6*150+25 200];
            uit.Data = table;
            set(handles.root ,'string' , result.root7);
            set(handles.time ,'string' , result.time7);
@@ -275,8 +339,8 @@ function all_Callback(hObject, eventdata, handles)
            uit.ColumnWidth = {128,128,128,128,128,128,128};
         case 'BergeVita'  
            table = result.table8
-           [k,j] = size(table);
-           uit.Position = [50 300 j*150+25 200];
+           %[k,j] = size(table);
+           uit.Position = [50 300 6*150+25 200];
            uit.Data = table;
            set(handles.root ,'string' , result.root8);
            set(handles.time ,'string' , result.time8);
@@ -302,3 +366,40 @@ function all_CreateFcn(hObject, eventdata, handles)
 if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
     set(hObject,'BackgroundColor','white');
 end
+
+
+% --- Executes on button press in graph1.
+function graph1_Callback(hObject, eventdata, handles)
+% hObject    handle to graph1 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+        f = getappdata(0,'fig');
+        result = getappdata(0,'result');
+        table = result.table;
+        table1 = result.table1;
+        table2 = result.table2;
+        table3 = result.table3;
+        table4 = result.table4;
+        table5 = result.table5;
+        table6 = result.table6;
+        table7 = result.table7;
+        table8 = result.table8;
+        plotAllErrors(table,table1,table2,table3,table4,table5,table6,table7,table8,f);
+
+% --- Executes on button press in praph2.
+function praph2_Callback(hObject, eventdata, handles)
+% hObject    handle to praph2 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+        f = getappdata(0,'fig');
+        result = getappdata(0,'result');
+        table = result.table;
+        table1 = result.table1;
+        table2 = result.table2;
+        table3 = result.table3;
+        table4 = result.table4;
+        table5 = result.table5;
+        table6 = result.table6;
+        table7 = result.table7;
+        table8 = result.table8;
+        plotAllRoots(table,table1,table2,table3,table4,table5,table6,table7,table8,f);
