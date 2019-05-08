@@ -92,24 +92,24 @@ function pre_Callback(hObject, eventdata, handles)
     fun = getappdata(0 , 'function');
     f = getappdata(0 , 'fig');
     if(strcmp(m,'bisection'))
-        BisectionPlot(fun , table,f);
+        BisectionPlot(fun , table,i,f);
     elseif(strcmp(m,'falseposition'))
-        FalsePositionPlot(fun ,table,f);
+        FalsePositionPlot(fun ,table,i,f);
     elseif(strcmp(m,'fixedpoint'))
         g = result.g;
-        FixedPointPlot(g,table,f);
+        FixedPointPlot(g,table,i,f);
     elseif(strcmp(m,'newton'))
-        NewtonRaphsonPlot(fun,table,f);
+        NewtonRaphsonPlot(fun,table,i,f);
     elseif(strcmp(m,'newton1'))
-        NewtonRaphsonPlot(fun,table,f);
+        NewtonRaphsonPlot(fun,table,i,f);
     elseif(strcmp(m,'newton2'))
-        NewtonRaphsonPlot(fun,table,f);
+        NewtonRaphsonPlot(fun,table,i,f);
     elseif(strcmp(m,'secant'))
-        SecantPlot(fun,table,f);
+        SecantPlot(fun,table,i,f);
     elseif(strcmp(m,'secant1'))
-        SecantPlot(fun,table,f);
+        SecantPlot(fun,table,i,f);
     elseif(strcmp(m,'bergvita'))
-        NewtonRaphsonPlot(fun,table,f);
+        NewtonRaphsonPlot(fun,table,i,f);
     end
     end
 
@@ -130,24 +130,24 @@ function next_Callback(hObject, eventdata, handles)
     fun = getappdata(0 , 'function');
     f = getappdata(0,'fig');
     if(strcmp(m,'bisection'))
-        BisectionPlot(fun , table,f);
+        BisectionPlot(fun , table,i,f);
     elseif(strcmp(m,'falseposition'))
-        FalsePositionPlot(fun , table ,f);
+        FalsePositionPlot(fun , table,i ,f);
     elseif(strcmp(m,'fixedpoint'))
         g = result.g;
-        FixedPointPlot(g,table,f);
+        FixedPointPlot(g,table,i,f);
     elseif(strcmp(m,'newton'))
-        NewtonRaphsonPlot(fun,table,f);
+        NewtonRaphsonPlot(fun,table,i,f);
     elseif(strcmp(m,'newton1'))
-        NewtonRaphsonPlot(fun,table,f);
+        NewtonRaphsonPlot(fun,table,i,f);
     elseif(strcmp(m,'newton2'))
-        NewtonRaphsonPlot(fun,table,f);
+        NewtonRaphsonPlot(fun,table,i,f);
     elseif(strcmp(m,'secant'))
-        SecantPlot(fun,table,f);
+        SecantPlot(fun,table,i,f);
     elseif(strcmp(m,'secant1'))
-        SecantPlot(fun,table,f);
+        SecantPlot(fun,table,i,f);
     elseif(strcmp(m,'bergvita'))
-        NewtonRaphsonPlot(fun,table,f);
+        NewtonRaphsonPlot(fun,table,i,f);
     end
     end
     
