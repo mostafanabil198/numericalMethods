@@ -6,7 +6,7 @@ clf;
 grid on;
 xlabel('Iterations')
 ylabel('Errors')
-ylim([0 50])
+xlim([0 50])
 if length(bisection)~=0
 plot(bisection(:,1), bisection(:,6));
 hold on;

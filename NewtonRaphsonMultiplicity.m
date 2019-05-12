@@ -9,6 +9,7 @@ f(x)=sym(fun);
 fDash(x)=diff(f,x);
 xNew=x0;
 table=[];
+tic;
 for i=1:numOfIterations
     xPrev=xNew;
     if(eval(fDash(xPrev))==0)

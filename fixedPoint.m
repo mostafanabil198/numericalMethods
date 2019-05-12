@@ -32,8 +32,9 @@ for i=1:size(terms(:))
     catch
     end
 end
-g(x);
-gDash(x);
+gggg = g(x)
+ggggD = gDash(x)
+ggggD1 = diff(g,x)
 min;
 
 table=[];
@@ -70,7 +71,7 @@ for i=1:numOfIterations
     end
 end
 if i>=numOfIterations
-    error = 'root not found to desired tolerance';
+    errorMsg = 'root not found to desired tolerance';
 end
 root=xNew;
 time = toc;

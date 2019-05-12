@@ -1,6 +1,7 @@
 function [ ] = FixedPointPlot( gFun,table,i,cf )
 %UNTITLED3 Summary of this function goes here
 %   Detailed explanation goes here
+e = exp(1);
 syms x;
 f(x)=sym('x');
 figure(cf);

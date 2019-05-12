@@ -198,8 +198,10 @@ function output_Callback(hObject, eventdata, handles)
        uit.ColumnWidth = {150,150,150,150};
        %s1 = result.g
        %s2 = result.gDash
-       set(handles.g,'string',result.g);
-       set(handles.gdash,'string',result.gDash);
+       hawhawhawhaw = result.g
+       set(handles.g,'string',char(result.g));
+       hohohohoh = result.gDash
+       set(handles.gdash,'string',char(result.gDash));
     elseif(strcmp(m,'newton'))
        uit.Position = [50 300 6*150+25 200];
        uit.ColumnName = {'col1' , 'col2' , 'col3' , 'col4' , 'col5' , 'col6'};
@@ -294,8 +296,8 @@ function all_Callback(hObject, eventdata, handles)
            handles.g2.Visible = 'on';
            handles.g.Visible = 'on';
            handles.gdash.Visible = 'on';
-           set(handles.g,'string',result.g);
-           set(handles.gdash,'string',result.gDash);
+           set(handles.g,'string',char(result.g));
+           set(handles.gdash,'string',char(result.gDash));
         case 'NewtonRaphson'
            table = result.table3
            %[k,j] = size(table);
