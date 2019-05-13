@@ -260,8 +260,9 @@ function solve_Callback(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
     if(~isempty(get(handles.guess , 'string')))
-        initial = strsplit(get(handles.guess));
+        initial = strsplit(get(handles.guess, 'string'), ';');
         fun = get(handles.functions , 'string');
+        fun = strsplit(fun,';');
         if(isempty(get(handles.error , 'string')) && isempty(get(handles.numitr , 'string')))
             [ xs,times,errorMsgs,tables ] = GaussSeidel( fun,initial ,50,0.00001,true );
         elseif(isempty(get(handles.error , 'string')))

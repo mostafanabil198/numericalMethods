@@ -47,7 +47,7 @@ for k=1:numOfIterations
             errorMsg='Can not divide by zero'
             return
         end
-        x(1,i)=(b(i)-sum)/a(i,i);
+        x(1,i)=num2cell((b(i)-sum)/a(i,i));
     end
     if strcmp(epsType,'true')
         d = x - xOld;
