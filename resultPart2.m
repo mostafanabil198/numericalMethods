@@ -84,11 +84,12 @@ function result_Callback(hObject, eventdata, handles)
     t.Position = [30 290 127 90];
     table = getappdata(0,'x');
     t.Data = table;
-    t.ColumnName = {'col1'};
+    t.ColumnName = {'X'};
     t.ColumnWidth = {100};
     set(handles.error , 'string',getappdata(0,'errorMsg'));
     set(handles.time , 'string',getappdata(0,'time'));
     if(strcmp(m,'seidel'))
+        WriteToFile(getappdata(0,'tables'),table,getappdata(0,'time'),getappdata(0,'errorMsg'),'GaussSeidel');
         t2 = uitable(resultPart2);
         t2.Tag = 'data3';
         t2.Position = [65 50 390 170];
@@ -96,6 +97,8 @@ function result_Callback(hObject, eventdata, handles)
         t2.ColumnWidth = {120};
         data = getappdata(0,'tables');
         t2.Data = data;
+    else
+        WriteToFile([],table,getappdata(0,'time'),getappdata(0,'errorMsg'),m);
     end    
 
 

@@ -178,23 +178,26 @@ function output_Callback(hObject, eventdata, handles)
     set(handles.error ,'string' , result.errorMsg);
     s = j
     if(strcmp(m,'bisection'))
+       WriteToFile(result.table,result.root,result.time,result.errorMsg,'Bisection');
        uit.Position = [50 300 6*150+25 200];
        handles.t.Visible = 'on';
        handles.theoretical.Visible = 'on';
-       uit.ColumnName = {'col1' , 'col2' , 'col3' , 'col4' , 'col5' , 'col6'};
+       uit.ColumnName = {'iteration', 'xr', 'xl', 'xu', 'f(xr)', 'error'};
        uit.ColumnWidth = {150,150,150,150,150,150};
        set(handles.theoretical ,'string' , result.theoretical);
     elseif(strcmp(m,'falseposition'))
+        WriteToFile(result.table,result.root,result.time,result.errorMsg,'FalsePosition');
        uit.Position = [50 300 6*150+25 200];
-       uit.ColumnName = {'col1' , 'col2' , 'col3' , 'col4' , 'col5' , 'col6'};
+       uit.ColumnName = {'iteration', 'xr', 'xl', 'xu', 'f(xr)', 'error'};
        uit.ColumnWidth = {150,150,150,150,150,150};
     elseif(strcmp(m,'fixedpoint'))
+       WriteToFile(result.table,result.root,result.time,result.errorMsg,'FixedPoint');
        uit.Position = [50 300 4*150+25 200];
        handles.g1.Visible = 'on';
        handles.g2.Visible = 'on';
        handles.g.Visible = 'on';
        handles.gdash.Visible = 'on';
-       uit.ColumnName = {'col1' , 'col2' , 'col3' , 'col4' };
+       uit.ColumnName = {'iteration', 'xPrev','xNew', 'error'};
        uit.ColumnWidth = {150,150,150,150};
        %s1 = result.g
        %s2 = result.gDash
@@ -203,34 +206,40 @@ function output_Callback(hObject, eventdata, handles)
        hohohohoh = result.gDash
        set(handles.gdash,'string',char(result.gDash));
     elseif(strcmp(m,'newton'))
+       WriteToFile(result.table,result.root,result.time,result.errorMsg,'NewtonRaphson');
        uit.Position = [50 300 6*150+25 200];
-       uit.ColumnName = {'col1' , 'col2' , 'col3' , 'col4' , 'col5' , 'col6'};
+       uit.ColumnName = {'iteration', 'Xi', 'Xi+1', 'f(Xi)', 'fun`(Xi)', 'error'};
        uit.ColumnWidth = {150,150,150,150,150,150};
     elseif(strcmp(m,'newton1'))
+        WriteToFile(result.table,result.root,result.time,result.errorMsg,'NewtonRaphsonMultiplicity');
        uit.Position = [50 300 6*150+25 200];
-       uit.ColumnName = {'col1' , 'col2' , 'col3' , 'col4' , 'col5' , 'col6'};
+       uit.ColumnName = {'iteration', 'Xi', 'Xi+1', 'f(Xi)', 'fun`(Xi)', 'error'};
        uit.ColumnWidth = {150,150,150,150,150,150};
     elseif(strcmp(m,'newton2'))
+        WriteToFile(result.table,result.root,result.time,result.errorMsg,'NewtonRaphsonModified');
        uit.Position = [50 300 6*150+25 200];
-       uit.ColumnName = {'col1' , 'col2' , 'col3' , 'col4' , 'col5' , 'col6' , 'col7'};
+       uit.ColumnName = {'iteration', 'Xi', 'Xi+1', 'f(Xi)', 'fun`(Xi)', 'f(Xi)``', 'error'};
        uit.ColumnWidth = {128,128,128,128,128,128,128};
     elseif(strcmp(m,'secant'))
+        WriteToFile(result.table,result.root,result.time,result.errorMsg,'Secant');
        uit.Position = [50 300 6*150+25 200];
-       uit.ColumnName = {'col1' , 'col2' , 'col3' , 'col4' , 'col5' , 'col6' , 'col7'};
+       uit.ColumnName = {'iteration', 'Xi', 'Xi-1', 'f(Xi)', 'fun(Xi-1)','Xi+1', 'error'};
        uit.ColumnWidth = {128,128,128,128,128,128,128};
     elseif(strcmp(m,'secant1'))
+        WriteToFile(result.table,result.root,result.time,result.errorMsg,'ModifiedSecant');
        uit.Position = [50 300 6*150+25 200];
-       uit.ColumnName = {'col1' , 'col2' , 'col3' , 'col4' , 'col5' , 'col6' , 'col7'};
+       uit.ColumnName = {'iteration', 'Xi', 'Xi+&Xi', 'f(Xi)', 'fun(Xi+&Xi)', 'Xi+1', 'error'};
        uit.ColumnWidth = {128,128,128,128,128,128,128};
     elseif(strcmp(m,'bergvita'))
+        WriteToFile(result.table,result.root,result.time,result.errorMsg,'BirgeVieta');
        uit.Position = [50 300 6*150+25 200];
-       uit.ColumnName = {'col1' , 'col2' , 'col3' , 'col4' , 'col5' , 'col6'};
+       uit.ColumnName = {'iteration', 'xPrev', 'fun(Xi)', 'fun`(Xi)', 'xNew', 'error'};
        uit.ColumnWidth = {150,150,150,150,150,150};
     elseif(strcmp(m,'all'))
        uit.Position = [50 300 6*150+25 200];
        handles.t.Visible = 'on';
        handles.theoretical.Visible = 'on';
-       uit.ColumnName = {'col1' , 'col2' , 'col3' , 'col4' , 'col5' , 'col6'};
+       uit.ColumnName = {'iteration', 'xr', 'xl', 'xu', 'f(xr)', 'error'};
        uit.ColumnWidth = {150,150,150,150,150,150};
        set(handles.theoretical ,'string' , result.theoretical);
        handles.all.Visible = 'on';
@@ -268,7 +277,7 @@ function all_Callback(hObject, eventdata, handles)
            set(handles.error ,'string' , result.errorMsg);
            handles.t.Visible = 'on';
            handles.theoretical.Visible = 'on';
-           uit.ColumnName = {'col1' , 'col2' , 'col3' , 'col4' , 'col5' , 'col6'};
+           uit.ColumnName = {'iteration', 'xr', 'xl', 'xu', 'f(xr)', 'error'};
            uit.ColumnWidth = {150,150,150,150,150,150};
            set(handles.theoretical ,'string' , result.theoretical);
            
@@ -280,7 +289,7 @@ function all_Callback(hObject, eventdata, handles)
            set(handles.root ,'string' , result.root1);
            set(handles.time ,'string' , result.time1);
            set(handles.error ,'string' , result.errorMsg1);
-           uit.ColumnName = {'col1' , 'col2' , 'col3' , 'col4' , 'col5' , 'col6'};
+           uit.ColumnName = {'iteration', 'xr', 'xl', 'xu', 'f(xr)', 'error'};
            uit.ColumnWidth = {150,150,150,150,150,150};
         case 'FixedPoint'
            table = result.table2
@@ -290,7 +299,7 @@ function all_Callback(hObject, eventdata, handles)
            set(handles.root ,'string' , result.root2);
            set(handles.time ,'string' , result.time2);
            set(handles.error ,'string' , result.errorMsg2);
-           uit.ColumnName = {'col1' , 'col2' , 'col3' , 'col4'};
+           uit.ColumnName = {'iteration', 'xPrev','xNew', 'error'};
            uit.ColumnWidth = {150,150,150,150};
            handles.g1.Visible = 'on';
            handles.g2.Visible = 'on';
@@ -306,7 +315,7 @@ function all_Callback(hObject, eventdata, handles)
            set(handles.root ,'string' , result.root3);
            set(handles.time ,'string' , result.time3);
            set(handles.error ,'string' , result.errorMsg3);
-           uit.ColumnName = {'col1' , 'col2' , 'col3' , 'col4' , 'col5' , 'col6'};
+           uit.ColumnName = {'iteration', 'Xi', 'Xi+1', 'f(Xi)', 'fun`(Xi)', 'error'};
            uit.ColumnWidth = {150,150,150,150,150,150};
         case 'NewtonModified1'
            table = result.table4
@@ -316,7 +325,7 @@ function all_Callback(hObject, eventdata, handles)
            set(handles.root ,'string' , result.root4);
            set(handles.time ,'string' , result.time4);
            set(handles.error ,'string' , result.errorMsg4);
-           uit.ColumnName = {'col1' , 'col2' , 'col3' , 'col4' , 'col5' , 'col6'};
+           uit.ColumnName = {'iteration', 'Xi', 'Xi+1', 'f(Xi)', 'fun`(Xi)', 'error'};
            uit.ColumnWidth = {150,150,150,150,150,150};
         case 'NewtonModified2'
            table = result.table5
@@ -326,7 +335,7 @@ function all_Callback(hObject, eventdata, handles)
            set(handles.root ,'string' , result.root5);
            set(handles.time ,'string' , result.time5);
            set(handles.error ,'string' , result.errorMsg5);
-           uit.ColumnName = {'col1' , 'col2' , 'col3' , 'col4' , 'col5' , 'col6' , 'col7'};
+           uit.ColumnName = {'iteration', 'Xi', 'Xi+1', 'f(Xi)', 'fun`(Xi)', 'f(Xi)``', 'error'};
            uit.ColumnWidth = {128,128,128,128,128,128,128};
         case 'Secant'
            table = result.table6
@@ -336,7 +345,7 @@ function all_Callback(hObject, eventdata, handles)
            set(handles.root ,'string' , result.root6);
            set(handles.time ,'string' , result.time6);
            set(handles.error ,'string' , result.errorMsg6);
-           uit.ColumnName = {'col1' , 'col2' , 'col3' , 'col4' , 'col5' , 'col6' , 'col7'};
+           uit.ColumnName = {'iteration', 'Xi', 'Xi-1', 'f(Xi)', 'fun(Xi-1)','Xi+1', 'error'};
            uit.ColumnWidth = {128,128,128,128,128,128,128};
         case 'SecantModified'
            table = result.table7
@@ -346,7 +355,7 @@ function all_Callback(hObject, eventdata, handles)
            set(handles.root ,'string' , result.root7);
            set(handles.time ,'string' , result.time7);
            set(handles.error ,'string' , result.errorMsg7);
-           uit.ColumnName = {'col1' , 'col2' , 'col3' , 'col4' , 'col5' , 'col6' , 'col7'};
+           uit.ColumnName = {'iteration', 'Xi', 'Xi+&Xi', 'f(Xi)', 'fun(Xi+&Xi)', 'Xi+1', 'error'};
            uit.ColumnWidth = {128,128,128,128,128,128,128};
         case 'BergeVita'  
            table = result.table8
@@ -356,7 +365,7 @@ function all_Callback(hObject, eventdata, handles)
            set(handles.root ,'string' , result.root8);
            set(handles.time ,'string' , result.time8);
            set(handles.error ,'string' , result.errorMsg8);
-           uit.ColumnName = {'col1' , 'col2' , 'col3' , 'col4' , 'col5' , 'col6'};
+           uit.ColumnName = {'iteration', 'xPrev', 'fun(Xi)', 'fun`(Xi)', 'xNew', 'error'}
            uit.ColumnWidth = {150,150,150,150,150,150};
             
     end

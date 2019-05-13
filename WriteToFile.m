@@ -1,7 +1,7 @@
 function [] = WriteToFile(table, root, time, errorMsg, method)
 %UNTITLED3 Summary of this function goes here
 %   Detailed explanation goes here
-
+header = {};
 if strcmp(method,'Bisection') || strcmp(method,'FalsePosition')
     header={'iteration', 'xr', 'xl', 'xu', 'f(xr)', 'error'};
 elseif strcmp(method,'BirgeVieta')
@@ -30,14 +30,30 @@ elseif strcmp(method,'GaussSeidel')
     end
 end
 
-xlswrite('iterations.xls',header,1,'1A');
-xlswrite('iterations.xls',table,1,'2A');
-
+if exist('iterations.xls', 'file');
+  delete('iterations.xls');
+end
+if(~(strcmp(method,'gauss') || strcmp(method,'jordon') || strcmp(method,'lu')))
+    try
+    xlswrite('iterations.xls',header,1,'1A');
+    xlswrite('iterations.xls',table,1,'2A');
+    catch er
+        disp('error fl files');
+    end
+end
 
 fileID = fopen('results.txt', 'w');
 
 fprintf(fileID,'RESULTS OF %s \r\n', method);
-fprintf(fileID,'root=%6.2f \r\ntime=%12.8f \r\nerrorMsg: %s', root, time,errorMsg);
+
+if(strcmp(method,'gauss') || strcmp(method,'jordon') || strcmp(method,'lu'))
+    for i=1:size(root(:),1)
+        fprintf(fileID,'root %d = %6.2f \r\n', i, root(i))
+    end
+    fprintf(fileID,'\r\ntime=%12.8f \r\nerrorMsg: %s', time,errorMsg);
+else
+    fprintf(fileID,'root=%.12f \r\ntime=%.12f \r\nerrorMsg: %s', root, time,errorMsg);
+end
 fclose(fileID);
 
 end

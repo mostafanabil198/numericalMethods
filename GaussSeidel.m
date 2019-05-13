@@ -10,11 +10,18 @@ for i=1:size(eqns(:),1)
 end
 eqns = eqns1;
 [a,b]=equationsToMatrix(eqns);
-n=length(eqns);
+n=length(eqns)
 %for z=1:length(initials)
 %  x(z,1)=initials(1,z);
 %end
-x=initials;
+
+nnn=cell2mat(initials);
+x = [];
+for i=1:length(nnn)
+    x = [x,str2num(nnn(1,i))];
+end
+length(x)
+class(x)
 table=[];
 if a(1,1)>=a(1,2)+a(1,3)
     if a(2,2)>= a(2,1)+a(2,3)
@@ -35,6 +42,7 @@ end
 tic;
 for k=1:numOfIterations
     xOld=x;
+    length(xOld)
     for i=1:n
         sum=0;
         for j=1:i-1
@@ -47,7 +55,10 @@ for k=1:numOfIterations
             errorMsg='Can not divide by zero'
             return
         end
-        x(1,i)=num2cell((b(i)-sum)/a(i,i));
+        sssssss = size(b)
+        b
+        class(b)
+        x(1,i)=(b(i,1)-sum)/a(i,i);
     end
     if strcmp(epsType,'true')
         d = x - xOld;
