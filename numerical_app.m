@@ -122,7 +122,7 @@ function part1file_Callback(hObject, eventdata, handles)
         name = get(handles.hoho , 'string');
         [ fun, method, interval, numOfIterations, eps, epsType  ] = readFile( name );
         switch method
-            case 'bisection'
+            case 'Bisection'
                 [ table, root, time, errorMsg , theoretical] = Bisection(fun,interval(1,1),interval(1,2),numOfIterations,eps,epsType);
                 result.table = table;
                 result.time = time;
@@ -206,25 +206,25 @@ function part2file_Callback(hObject, eventdata, handles)
         name = get(handles.hoho , 'string');
         [ fun, method, interval, numOfIterations, eps, epsType  ] = readFile2( name );
         switch method
-            case 'gaussJordon'
+            case 'GaussJordon'
                 [ xj, timej, errorMsgj ] = GaussJordan(fun);
                 setappdata(0,'x',xj);
                 setappdata(0,'time',timej);
                 setappdata(0,'errorMsg',errorMsgj);
                 setappdata(0,'method','jordon');
-            case 'gaussElimination'
+            case 'GaussElimination'
                 [ x, time, errorMsg ] = GaussElimination(fun);
                 setappdata(0,'x',x);
                 setappdata(0,'time',time);
                 setappdata(0,'errorMsg',errorMsg);
                 setappdata(0,'method','gauss');
-            case 'lu'
+            case 'LU'
                 [ xlu, timelu, errorMsglu ] = LUMatrix(fun);
                 setappdata(0,'x',xlu);
                 setappdata(0,'time',timelu);
                 setappdata(0,'errorMsg',errorMsglu);
                 setappdata(0,'method','lu');
-            case 'seidel'
+            case 'Seidel'
                 [ xs,times,errorMsgs,tables ] = GaussSeidel( fun,interval ,numOfIterations,eps,epsType );
                 setappdata(0,'x',xs);
                 setappdata(0,'time',times);
