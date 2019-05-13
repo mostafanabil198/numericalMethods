@@ -131,14 +131,14 @@ function part1file_Callback(hObject, eventdata, handles)
                 result.theoretical = theoretical;
                 setappdata(0,'method','bisection');
             case 'FalsePosition'
-                [ table, root, time, errorMsg] = FalsePosition(fun,interval(1,1),interval(1,2),numOfIterations,eps,epsType);
+                [ table, root, time, errorMsg] = falsePosition(fun,interval(1,1),interval(1,2),numOfIterations,eps,epsType);
                 result.table = table;
                 result.time = time;
                 result.root = root;
                 result.errorMsg = errorMsg;
                 setappdata(0,'method','falseposition');
             case 'FixedPoint'
-                [ table, root, time, note, errorMsg, g, gDash] = fixedPoint(fun,interval,numOfIterations,eps,epsType);
+                [ table, root, time, errorMsg , g , gDash] = FixedPoint(fun,interval,numOfIterations,eps,epsType);
                 result.table = table;
                 result.time = time;
                 result.root = root;
