@@ -246,11 +246,6 @@ function ans2_Callback(hObject, eventdata, handles)
 % handles    structure with handles and user data (see GUIDATA)
     if(~isempty(get(handles.file , 'string')))
         name = get(handles.file , 'string');
-        [fun , xl , xu , precision , step] = readGeneral(name);
-        [roots , time] = generalAlgorithm(fun , xl , xu , precision , step);
-        setappdata(0,'generaltable',roots);
-        setappdata(0,'generaltime',time);
-        generalOutput;
     end
     
 
