@@ -1,7 +1,4 @@
-RESULTS OF jordon 
-root 1 =   1.00 
-root 2 =   2.00 
-root 3 =  -1.00 
-
-time=  0.24685087 
-errorMsg: 
+RESULTS OF FixedPoint 
+root=0.567140781458 
+time=0.277319748669 
+errorMsg:  

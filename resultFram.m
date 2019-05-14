@@ -182,7 +182,7 @@ function output_Callback(hObject, eventdata, handles)
        uit.Position = [50 300 6*150+25 200];
        handles.t.Visible = 'on';
        handles.theoretical.Visible = 'on';
-       uit.ColumnName = {'iteration', 'xr', 'xl', 'xu', 'f(xr)', 'error'};
+       uit.ColumnName = {'iteration', 'xl', 'xu', 'xr', 'f(xr)', 'error'};
        uit.ColumnWidth = {150,150,150,150,150,150};
        set(handles.theoretical ,'string' , result.theoretical);
     elseif(strcmp(m,'falseposition'))

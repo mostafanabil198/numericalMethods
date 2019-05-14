@@ -1,21 +1,26 @@
 function [ table, root, time, errorMsg, theoretical] = Bisection( fun,xl,xu,numOfIterations,eps, epsType )
-%UNTITLED Summary of this function goes here
-%   Detailed explanation goes here
+    %to handle e as input in the equation
 e = exp(1);
+    %initialize output
 root = 0;
 time = 0;
-theoretical=0;
 errorMsg = ' ';
+    %calculate number of iterations theoretically
+theoretical=0;
+
 syms x;
 f(x)=sym(fun);
 table=[];
 xOld=0;
 tic;
+    %if the interval has no roots in the interval
 if eval(f(xl))*eval(f(xu))>0
     errorMsg = 'root does not exist in this interval';
     time = toc;
     return
 end
+
+    %if one of xl and xu is root
 if eval(f(xl))*eval(f(xu))==0
     if eval(f(xl))==0
         xr=xl;
@@ -31,7 +36,10 @@ if eval(f(xl))*eval(f(xu))==0
         return
     end
 end
+    %calulate number of iterations theoretically
 theoretical= ceil(abs(log2(abs(xl-xu))-log2(eps)))
+
+    %loop until we find the root by getting the xr as (xl+xu)/2
 for i=1:numOfIterations
     xr = (xl + xu)/2;
     if strcmp(epsType,'true')
@@ -45,6 +53,7 @@ for i=1:numOfIterations
     else
         xu=xr;
     end
+    %if exceeded the error bound
     if error<= eps
         root=xr;
         time = toc;
@@ -52,6 +61,8 @@ for i=1:numOfIterations
     end
     xOld=xr;
 end
+    %exceeded number of iterations and didint return so there was no root
+    %within the iteration number
 if i>=numOfIterations
     errorMsg = 'root not found to desired tolerance';
 end

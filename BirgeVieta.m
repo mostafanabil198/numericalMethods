@@ -1,14 +1,16 @@
 function [ table, root, time, errorMsg ] = BirgeVieta( fun,x0,numOfIterations,eps,epsType )
-%UNTITLED8 Summary of this function goes here
-%   Detailed explanation goes here
 syms x;
+    %initialize outputs
 root = 0;
 time = 0;
 errorMsg = ' ';
+
 f(x)=sym(fun);
 xNew=x0;
 table=[];
 tic;
+    %try to convert the equation to polynomial function if that throw error
+    %then it's not a polynomial function
 try 
     a = sym2poly(f);
 catch
@@ -16,8 +18,11 @@ catch
    time = toc;
    return;
 end
+
 b=[];
 c=[];
+    %ith is variable that holds orders of equation desc. ex-> 4 3 2 1 if
+    %the equation of the 4th order
 ith = [size(a(:))-1:-1:0];
 for i=1:numOfIterations
     b = [];
@@ -45,12 +50,14 @@ for i=1:numOfIterations
     fun = b(size(b(:),1));
     funD = c(size(c(:),1));
   table=[table;i xPrev fun funD xNew error];
+  %if it exceeded the error bound
      if error < eps || abs(b(size(b(:),1))) < 1e-6
         root=xNew;
         time = toc;
         return
     end
-  end
+end
+  %if it finished the iterations and didnt find a root
 if i>=numOfIterations
     errorMsg = 'root not found to desired tolerance';
 end

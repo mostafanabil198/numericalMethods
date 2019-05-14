@@ -1,5 +1,4 @@
 function [ table,root, time, errorMsg ] = Secant(fun,xPrev,xPrev1,numOfIterations,eps,epsType )
-%UNTITLED3 Summary of this function goes here
 e = exp(1);
 root = 0;
 time = 0;

@@ -1,6 +1,4 @@
 function [b] = Brent(f,xl,xu)
-%UNTITLED2 Summary of this function goes here
-%   Detailed explanation goes here
     a = xl; b = xu; fa = eval(f(a)); fb = eval(f(b));
     c = a; fc = fa; d = b - c; e = d;
     while (1)
