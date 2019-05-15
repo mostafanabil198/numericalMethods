@@ -97,6 +97,7 @@ function result_Callback(hObject, eventdata, handles)
         t2.ColumnWidth = {120};
         data = getappdata(0,'tables');
         t2.Data = data;
+        GaussSeidelPlot( data );
     else
         WriteToFile([],table,getappdata(0,'time'),getappdata(0,'errorMsg'),m);
     end    
