@@ -1,6 +1,4 @@
-RESULTS OF GaussSeidel 
-root=1.000000099576 
-time=2.000000056286 
-errorMsg: -1.000000e+00root=1.034644208293 
-time= 
-errorMsg: 
+RESULTS OF Bisection 
+root=0.567146301270 
+time=0.284420737652 
+errorMsg:  
